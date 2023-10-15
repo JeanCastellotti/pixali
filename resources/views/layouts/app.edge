@@ -12,7 +12,10 @@
   </head>
 
   <body class="min-h-screen bg-slate-900">
-    @!header()
-    @!section('content')
+    @include('partials/header')
+
+    <main class="container">
+      @!section('content')
+    </main>
   </body>
 </html>
