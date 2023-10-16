@@ -1,0 +1,54 @@
+@layout('layouts/auth')
+
+@set('title', 'Connexion')
+
+@section('content')  
+<form method="post" autocomplete="off" novalidate>
+  <div class="mb-6">
+    <label for="username" class="mb-1 text-slate-300 flex items-center justify-between">
+      <span class="font-medium ">Nom d'utilisateur</span>      
+      @if(flashMessages.has('errors.username'))
+        <div class="text-sm text-red-500 flex items-center gap-2">
+          @!icons.exclamationTriangle()
+          <span>
+            {{ flashMessages.get('errors.username')[0] }}
+          </span>
+        </div>
+      @end
+    </label>    
+    <input type="text" id="username" name="username" value="{{ flashMessages.get('username') || '' }}" required class="rounded bg-slate-900 p-4 w-full text-slate-500 border border-slate-600 shadow-lg transition focus:outline-none focus:bg-slate-950">
+  </div>
+
+  <div class="mb-6">
+    <label for="email" class="mb-1 text-slate-300 flex items-center justify-between">
+      <span class="font-medium">Adresse e-mail</span>      
+      @if(flashMessages.has('errors.email'))
+        <div class="text-sm text-red-500 flex items-center gap-2">
+          @!icons.exclamationTriangle()
+          <span>{{ flashMessages.get('errors.email') }}</span>
+        </div>
+      @end
+    </label>
+    <input type="email" id="email" name="email" value="{{ flashMessages.get('email') || '' }}" required class="rounded bg-slate-900 p-4 w-full text-slate-500 border border-slate-600 shadow-lg transition focus:outline-none focus:bg-slate-950">
+  </div>
+
+  <div class="mb-6">
+    <label for="password" class="mb-1 text-slate-300 flex items-center justify-between">
+      <span class="font-medium">Mot de passe</span>      
+      @if(flashMessages.has('errors.password'))
+        <div class="text-sm text-red-500 flex items-center gap-2">
+          @!icons.exclamationTriangle()
+          <span>{{ flashMessages.get('errors.password') }}</span>
+        </div>
+      @end
+    </label>
+    <input type="password" id="password" name="password" required class="rounded bg-slate-900 p-4 w-full text-slate-500 border border-slate-600 shadow-lg transition focus:outline-none focus:bg-slate-950">
+  </div>
+
+  <button class="mt-12 bg-sky-950 text-sky-300 rounded border border-sky-700 p-4 transition w-full hover:bg-sky-700 hover:text-sky-200">Créer un compte</button>
+
+  <div class="flex mt-12 justify-between text-sky-500 text-sm font-medium">
+    <a href="/login" class="transition hover:text-slate-300">Je déjà un compte</a>
+  </div>
+</form>
+@end

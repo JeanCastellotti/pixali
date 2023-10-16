@@ -1,0 +1,15 @@
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import User from 'App/Models/User'
+import RegisterValidator from 'App/Validators/RegisterValidator'
+
+export default class RegisterController {
+  public create({ view }: HttpContextContract) {
+    return view.render('auth/register')
+  }
+
+  public async store({ request, response }: HttpContextContract) {
+    const payload = await request.validate(RegisterValidator)
+    await User.create(payload)
+    return response.redirect('/')
+  }
+}

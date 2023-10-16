@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+  @include('partials/head')
+
+  <body>
+    <main class="min-h-screen bg-slate-900 flex">
+      <div class="absolute w-96 h-96 bg-gradient-to-br opacity-50 from-sky-500 to-sky-600 blur-[128px] z-0 top-0 left-0"></div>
+
+      <div class="absolute w-96 h-96 bg-gradient-to-tl opacity-50 from-sky-500 to-sky-600 blur-[256px] z-0 bottom-0 right-0"></div>
+
+      <a href="/" class="absolute top-5 right-5 flex items-center gap-3 text-sky-500 font-medium transition hover:text-slate-300 group">
+        <span>Accueil</span>
+        <span class="transition-[transform] group-hover:translate-x-1">
+          @!icons.arrowSmallRight()
+        </span>
+      </a>
+
+      <div class="m-auto max-w-screen-sm w-full z-10">
+        <div class="flex items-center justify-center mb-12">
+          <a href="/" class="mr-6 relative -top-0.5">
+            <img src="/logo.png" alt="Logo Pixali">
+          </a>
+        </div>
+
+        @!section('content')
+      </div>
+    </main>
+  </body>
+</html>
