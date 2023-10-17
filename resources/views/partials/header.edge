@@ -20,9 +20,16 @@
       </button>
     </div>  --}}
 
-    <div class="space-x-3 text-sm font-medium">
-      <a href="/login" class="bg-slate-950 text-slate-300 rounded border border-slate-700 px-3 py-2 transition hover:bg-slate-700 hover:text-slate-200">Connexion</a>
-      <a href="/register" class="bg-sky-950 text-sky-300 rounded border border-sky-700 px-3 py-2 transition hover:bg-sky-700 hover:text-sky-200">Inscription</a>
+    <div class="flex gap-3 text-sm font-medium">
+      @if(auth.isLoggedIn)
+        <form action="/logout" method="post">
+          <button class="bg-slate-950 text-slate-300 rounded border border-slate-700 px-3 py-2 transition hover:bg-slate-700 hover:text-slate-200">Déconnexion</button>
+        </form>
+        <a href="/account" class="bg-sky-950 text-sky-300 rounded border border-sky-700 px-3 py-2 transition hover:bg-sky-700 hover:text-sky-200">Mon compte</a>
+      @else
+        <a href="/login" class="bg-slate-950 text-slate-300 rounded border border-slate-700 px-3 py-2 transition hover:bg-slate-700 hover:text-slate-200">Connexion</a>
+        <a href="/register" class="bg-sky-950 text-sky-300 rounded border border-sky-700 px-3 py-2 transition hover:bg-sky-700 hover:text-sky-200">Inscription</a>
+      @end
     </div>
   </div>
 </header>
