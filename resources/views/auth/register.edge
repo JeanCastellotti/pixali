@@ -4,6 +4,7 @@
 
 @section('content')
 <form method="post" autocomplete="off" novalidate>
+  {{ csrfField() }}
   <div class="mb-6">
     <label for="username" class="mb-1 text-slate-300 flex items-center justify-between">
       <span class="font-medium ">Nom d'utilisateur</span>      
