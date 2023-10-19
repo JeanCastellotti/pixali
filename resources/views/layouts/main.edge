@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+  @include('partials/head')
+
+  <body>
+    <div class="min-h-screen bg-slate-900">
+      @include('partials/header')    
+      @include('partials/toast')
+
+      <main class="container">
+        @!section('content')
+      </main>
+    </div>
+  </body>
+</html>

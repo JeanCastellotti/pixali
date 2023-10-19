@@ -6,14 +6,42 @@ export default class AuthController {
     return view.render('auth/login')
   }
 
-  public async store({ request, auth, response }: HttpContextContract) {
+  public async store({ request, auth, session, response }: HttpContextContract) {
     const { email, password } = await request.validate(LoginValidator)
-    await auth.attempt(email, password, true)
+
+    try {
+      await auth.attempt(email, password, true)
+
+      session.flash({
+        alert: {
+          type: 'success',
+          message: 'Vous êtes connecté',
+        },
+      })
+    } catch (error) {
+      session.flash({
+        alert: {
+          type: 'error',
+          message: "Nous n'avons pas pu vous identifier",
+        },
+      })
+
+      return response.redirect().back()
+    }
+
     return response.redirect().toRoute('home')
   }
 
-  public async destroy({ auth, response }: HttpContextContract) {
+  public async destroy({ auth, session, response }: HttpContextContract) {
     await auth.logout()
+
+    session.flash({
+      alert: {
+        type: 'success',
+        message: 'Vous avez été déconnecté',
+      },
+    })
+
     return response.redirect().toRoute('home')
   }
 }

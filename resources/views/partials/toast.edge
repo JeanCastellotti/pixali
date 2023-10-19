@@ -1,0 +1,24 @@
+@if(flashMessages.has('alert'))
+  @set('icon', '')
+  @set('color', '')
+
+  @if(flashMessages.get('alert.type') === 'success')
+    @set('icon', 'check-circle')
+    @set('color', 'text-emerald-500')
+  @elseif(flashMessages.get('alert.type') === 'error')
+    @set('icon', 'exclamation-circle')
+    @set('color', 'text-red-500')
+  @elseif(flashMessages.get('alert.type') === 'info')
+    @set('icon', 'information-circle')
+    @set('color', 'text-sky-500')
+  @end
+
+  <div class="fixed bottom-5 right-5 flex items-center gap-4 rounded p-4 bg-slate-950 border-2 border-slate-700 shadow z-50 animate-slide-in max-w-sm {{ color }}">
+    <span class="shrink-0">
+      @!component(`components/icons/${icon}`)
+    </span>
+    <span>
+      {{ flashMessages.get('alert.message') }}
+    </span>
+  </div>
+@end

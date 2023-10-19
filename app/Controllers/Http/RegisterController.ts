@@ -7,10 +7,16 @@ export default class RegisterController {
     return view.render('auth/register')
   }
 
-  public async store({ request, auth, response }: HttpContextContract) {
+  public async store({ request, auth, session, response }: HttpContextContract) {
     const payload = await request.validate(RegisterValidator)
     const user = await User.create(payload)
     await auth.login(user, true)
+    session.flash({
+      alert: {
+        type: 'success',
+        message: `Votre compte a été créé ! Un lien de vérification vous a été envoyé.`,
+      },
+    })
     return response.redirect().toRoute('home')
   }
 }
