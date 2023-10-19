@@ -4,6 +4,16 @@
 
   <body>
     <div class="min-h-screen bg-slate-900">
+      @if(auth.isLoggedIn && !auth.user.emailVerifiedAt)
+        <div class="bg-slate-950 border-b border-slate-800 py-5">
+          <div class="container text-slate-300 text-sm flex items-center justify-center gap-6">
+            @!icons.shieldExclamation()
+            <span>Vous n'avez pas vérifié votre adresse e-mail.</span>
+            <a href="/verification" class="text-sky-500 transition hover:text-slate-300">Avez-vous reçu le lien de vérification ?</a>
+          </div>
+        </div>
+      @end
+
       @include('partials/header')    
       @include('partials/toast')
 

@@ -1,0 +1,28 @@
+@layout('layouts/auth')
+
+@set('title', 'Connexion')
+
+@section('content')
+
+<div class="text-slate-400 space-y-3 mb-12">
+  <p>Lors de votre inscription, nous vous avons envoyé un lien de vérification. Cliquez sur ce lien pour vérifier votre adresse e-mail.</p>
+  <p>Si vous n'avez pas reçu le lien de vérification ou qu'il a expiré, saisissez votre adresse <span class="whitespace-nowrap">e-mail</span> <span class="whitespace-nowrap">ci-dessous</span> et nous vous l'enverrons à nouveau.</p>
+</div>
+
+<form method="post" autocomplete="off" novalidate>
+  <div class="mb-6">
+    <label for="email" class="mb-1 flex items-center justify-between">
+      <span class="text-slate-300 font-medium">Adresse e-mail</span>      
+      @if(flashMessages.has('errors.email'))
+        <div class="text-red-500 flex items-center gap-2">
+          @!icons.exclamationTriangle()
+          <span class="text-sm ">{{ flashMessages.get('errors.email') }}</span>
+        </div>
+      @end
+    </label>
+    <input type="email" id="email" name="email" required class="rounded bg-slate-900 p-4 w-full text-slate-500 border border-slate-600 shadow-lg transition focus:outline-none focus:bg-slate-950">
+  </div>
+
+  <button class="mt-12 bg-sky-950 text-sky-300 rounded border border-sky-700 p-4 transition w-full hover:bg-sky-700 hover:text-sky-200 disabled:opacity-50 disabled:hover:bg-sky-950 disabled:hover:none disabled:cursor-not-allowed">Renvoyer un lien de vérification</button>
+</form>
+@end
