@@ -14,12 +14,12 @@
     <input type="password" id="password" name="password" required class="rounded bg-slate-900 p-4 w-full text-slate-500 border border-slate-600 shadow-lg transition focus:outline-none focus:bg-slate-950">
   </div>
 
-  <button class="mt-12 bg-sky-950 text-sky-300 rounded border border-sky-700 p-4 transition w-full hover:bg-sky-700 hover:text-sky-200">Se connecter</button>
-
-  <div class="flex mt-12 justify-between text-sky-500 text-sm font-medium">
-    <a href="/register" class="transition hover:text-slate-300">Je n'ai pas de compte</a>
-    <a href="/forgot-password" class="transition hover:text-slate-300">J'ai oublié mon mot de passe</a>
-    <a href="/verification" class="transition hover:text-slate-300">Renvoyer le lien de vérification</a>
-  </div>
+  <button class="mt-12 bg-sky-950 text-sky-300 rounded border border-sky-700 p-4 transition w-full hover:bg-sky-700 hover:text-sky-200 disabled:opacity-50 disabled:hover:bg-sky-950 disabled:hover:none disabled:cursor-not-allowed">Se connecter</button>
 </form>
+
+<div class="flex mt-12 justify-between text-sky-500 text-sm font-medium">
+  <a href="/register" class="transition hover:text-slate-300">Je n'ai pas de compte</a>
+  <a href="/forgot-password" class="transition hover:text-slate-300">J'ai oublié mon mot de passe</a>
+  <a href="/verification" class="transition hover:text-slate-300">Renvoyer le lien de vérification</a>
+</div>
 @end
