@@ -1,6 +1,6 @@
 @layout('layouts/auth')
 
-@set('title', 'Connexion')
+@set('title', 'Renvoyer un lien de vérification')
 
 @section('content')
 
@@ -11,6 +11,7 @@
 
 <form method="post" autocomplete="off" novalidate>
   {{ csrfField() }}
+
   <div class="mb-6">
     <label for="email" class="mb-1 flex items-center justify-between">
       <span class="text-slate-300 font-medium">Adresse e-mail</span>      
