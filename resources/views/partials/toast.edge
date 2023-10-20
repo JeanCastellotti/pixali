@@ -13,7 +13,25 @@
     @set('color', 'text-sky-500')
   @end
 
-  <div class="fixed bottom-5 right-5 flex items-center gap-4 rounded p-4 bg-slate-950 border-2 border-slate-700 shadow z-50 animate-slide-in max-w-sm {{ color }}">
+  <div
+    x-cloak 
+    x-data="{ show: false }"
+    x-init="() => {
+      $nextTick(() => show = true)
+      setTimeout(() => {
+        $el.addEventListener('transitionend', () => $el.remove())
+        show = false
+      }, 5000)
+    }"
+    x-show="show"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="translate-x-full opacity-0"
+    x-transition:enter-end="translate-x-0 opacity-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="translate-x-0 opacity-100"
+    x-transition:leave-end="translate-x-full opacity-0"
+    class="fixed bottom-5 right-5 flex items-center gap-4 rounded p-4 bg-slate-950 {{ color }} border-2 border-slate-700 shadow z-50 max-w-sm"
+  >
     <span class="shrink-0">
       @!component(`components/icons/${icon}`)
     </span>
