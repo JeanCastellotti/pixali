@@ -63,4 +63,79 @@ test.group('Auth register', (group) => {
     response.assertStatus(200)
     response.assertRedirectsToRoute('register.create')
   })
+
+  test('should fail when username is too short', async ({ client }) => {
+    const response = await client
+      .post('/register')
+      .header('Referer', '/register')
+      .withCsrfToken()
+      .form({
+        username: 'te',
+        email: 'test@email.io',
+        password: 'Password!1234',
+      })
+
+    response.assertStatus(200)
+    response.assertRedirectsToRoute('register.create')
+  })
+
+  test('should fail when username is too long', async ({ client }) => {
+    const response = await client
+      .post('/register')
+      .header('Referer', '/register')
+      .withCsrfToken()
+      .form({
+        username: 'testtestestestest',
+        email: 'test@email.io',
+        password: 'Password!1234',
+      })
+
+    response.assertStatus(200)
+    response.assertRedirectsToRoute('register.create')
+  })
+
+  test('should fail when email is invalid', async ({ client }) => {
+    const response = await client
+      .post('/register')
+      .header('Referer', '/register')
+      .withCsrfToken()
+      .form({
+        username: 'test',
+        email: 'test@email',
+        password: 'Password!1234',
+      })
+
+    response.assertStatus(200)
+    response.assertRedirectsToRoute('register.create')
+  })
+
+  test('should fail when password is too short', async ({ client }) => {
+    const response = await client
+      .post('/register')
+      .header('Referer', '/register')
+      .withCsrfToken()
+      .form({
+        username: 'test',
+        email: 'test@email.io',
+        password: 'Pass',
+      })
+
+    response.assertStatus(200)
+    response.assertRedirectsToRoute('register.create')
+  })
+
+  test('should fail with invalid payload', async ({ client }) => {
+    const response = await client
+      .post('/register')
+      .header('Referer', '/register')
+      .withCsrfToken()
+      .form({
+        foo: 'test',
+        bar: 'test@email.io',
+        baz: 'Password!1234',
+      })
+
+    response.assertStatus(200)
+    response.assertRedirectsToRoute('register.create')
+  })
 })
