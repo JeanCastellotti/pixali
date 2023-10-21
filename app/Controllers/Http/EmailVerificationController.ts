@@ -1,45 +1,25 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import VerifyEmail from 'App/Mailers/VerifyEmail'
 import User from 'App/Models/User'
-import EmailValidator from 'App/Validators/EmailValidator'
 import { DateTime } from 'luxon'
 
 export default class EmailVerificationController {
-  public create({ view }: HttpContextContract) {
-    return view.render('auth/resend-verification')
-  }
-
-  public async store({ request, auth, session, response }: HttpContextContract) {
-    const { email } = await request.validate(EmailValidator)
-
-    const user = await User.findBy('email', email)
-
-    if (user?.emailVerifiedAt) {
-      session.flash({
-        alert: {
-          type: 'info',
-          message: 'Cette adresse e-mail a déjà été vérifiée.',
-        },
-      })
-
-      return response.redirect(auth.isLoggedIn ? '/' : '/login')
-    }
-
-    if (user) {
-      await new VerifyEmail(user).sendLater()
-    }
+  public async send({ auth, session, response }: HttpContextContract) {
+    await new VerifyEmail(auth.user!).sendLater()
 
     session.flash({
       alert: {
         type: 'success',
-        message: 'Un lien de vérification vous a été envoyé.',
+        message: 'Un nouveau lien de vérification vous a été envoyé.',
       },
     })
 
-    return response.redirect(auth.isLoggedIn ? '/' : '/login')
+    return response.redirect().back()
   }
 
   public async verify({ request, auth, params, session, response }: HttpContextContract) {
+    const redirectTo = auth.isLoggedIn ? 'home' : 'auth.create'
+
     if (!request.hasValidSignature()) {
       session.flash({
         alert: {
@@ -48,18 +28,16 @@ export default class EmailVerificationController {
         },
       })
 
-      return response.redirect('/verification')
+      return response.redirect().toRoute(redirectTo)
     }
 
-    const user = await User.findByOrFail('email', params.email)
-
-    const redirectTo = auth.isLoggedIn ? 'home' : 'auth.create'
+    const user = auth.user ?? (await User.findByOrFail('email', params.email))
 
     if (user.emailVerifiedAt) {
       session.flash({
         alert: {
           type: 'info',
-          message: 'Cette adresse e-mail a déjà été verifiée.',
+          message: 'Votre adresse e-mail a déjà été verifiée.',
         },
       })
 

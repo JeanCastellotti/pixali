@@ -9,11 +9,7 @@ export default class VerifyEmail extends BaseMailer {
   }
 
   public prepare(message: MessageContract) {
-    let url = Route.makeSignedUrl(
-      '/verification/:email',
-      { email: this.user.email },
-      { expiresIn: '30m' }
-    )
+    let url = Route.makeSignedUrl('email.verify', { email: this.user.email }, { expiresIn: '30m' })
 
     url = Env.get('APP_URL') + url
 

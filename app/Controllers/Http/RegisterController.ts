@@ -20,7 +20,7 @@ export default class RegisterController {
     session.flash({
       alert: {
         type: 'success',
-        message: `Votre compte a été créé ! Un lien de vérification vous a été envoyé.`,
+        message: `Votre compte a été créé ! Vous allez recevoir un lien pour vérifier votre adresse e-mail.`,
       },
     })
 

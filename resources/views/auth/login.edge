@@ -5,6 +5,7 @@
 @section('content')
 <form method="post" autocomplete="off" novalidate>
   {{ csrfField() }}
+
   <div class="mb-6">
     <label for="email" class="block mb-1 text-slate-300 font-medium">Email</label>
     <input type="email" id="email" name="email" required class="rounded bg-slate-900 p-4 w-full text-slate-500 border border-slate-600 shadow-lg transition focus:outline-none focus:bg-slate-950">
@@ -21,6 +22,5 @@
 <div class="flex mt-12 justify-between text-sky-500 text-sm font-medium">
   <a href="/register" class="transition hover:text-slate-300">Je n'ai pas de compte</a>
   <a href="/forgot-password" class="transition hover:text-slate-300">J'ai oublié mon mot de passe</a>
-  <a href="/verification" class="transition hover:text-slate-300">Renvoyer le lien de vérification</a>
 </div>
 @end
