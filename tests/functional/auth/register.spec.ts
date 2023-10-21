@@ -138,4 +138,16 @@ test.group('Auth register', (group) => {
     response.assertStatus(200)
     response.assertRedirectsToRoute('register.create')
   })
+
+  test('should redirect authenticated user', async ({ client }) => {
+    const user = await User.create({
+      username: 'test',
+      email: 'test@email.io',
+      password: 'Password!1234',
+    })
+
+    const response = await client.get('/register').loginAs(user)
+
+    response.assertRedirectsToRoute('home')
+  })
 })
