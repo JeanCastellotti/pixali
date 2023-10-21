@@ -4,7 +4,7 @@ Route.on('/').render('home').as('home')
 
 Route.get('login', 'AuthController.create').as('auth.create').middleware('guest')
 Route.post('login', 'AuthController.store').middleware('guest')
-Route.get('register', 'RegisterController.create').middleware('guest')
+Route.get('register', 'RegisterController.create').as('register.create').middleware('guest')
 Route.post('register', 'RegisterController.store').middleware('guest')
 Route.post('logout', 'AuthController.destroy').as('auth.logout').middleware('auth')
 
