@@ -55,12 +55,6 @@ test.group('Auth login', (group) => {
   })
 
   test('should fail with invalid payload', async ({ client }) => {
-    const user = await User.create({
-      username: 'test',
-      email: 'test@email.io',
-      password: 'Password!1234',
-    })
-
     const response = await client.post('/login').header('Referer', '/login').withCsrfToken().form({
       username: 'test',
       password: 'Password!1234',
