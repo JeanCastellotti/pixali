@@ -15,7 +15,7 @@ test.group('Auth login', (group) => {
       password: 'Password!1234',
     })
 
-    const response = await client.post('/login').withCsrfToken().form({
+    const response = await client.post('/login').header('Referer', '/login').withCsrfToken().form({
       email: user.email,
       password: 'Password!1234',
     })
