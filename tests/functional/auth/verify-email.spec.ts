@@ -4,7 +4,7 @@ import { test } from '@japa/runner'
 import User from 'App/Models/User'
 import Route from '@ioc:Adonis/Core/Route'
 
-test.group('Auth email', (group) => {
+test.group('Auth verify email', (group) => {
   group.each.setup(async () => {
     await Database.beginGlobalTransaction()
     return () => Database.rollbackGlobalTransaction()
@@ -21,9 +21,9 @@ test.group('Auth email', (group) => {
 
     const response = await client.post('/verify').loginAs(user).withCsrfToken().form({})
 
-    assert.isTrue(
-      mailer.exists((mail) => mail.subject === '[Pixali] Vérification de votre adresse e-mail')
-    )
+    const subject = '[Pixali] Vérification de votre adresse e-mail'
+
+    assert.isTrue(mailer.exists((mail) => mail.subject === subject))
 
     response.assertStatus(200)
     response.assertRedirectsToRoute('home')
