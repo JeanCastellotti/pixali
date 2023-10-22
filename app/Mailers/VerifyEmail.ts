@@ -17,6 +17,6 @@ export default class VerifyEmail extends BaseMailer {
       .subject(`[${Env.get('APP_TITLE')}] Vérification de votre adresse e-mail`)
       .from(Env.get('APP_EMAIL'), Env.get('APP_TITLE'))
       .to(this.user.email)
-      .htmlView('emails/verify-email', { user: this.user, url })
+      .htmlView('emails/verify-email', { username: this.user.username, url })
   }
 }
