@@ -15,11 +15,10 @@ test.group('Auth register', (group) => {
       password: 'Password!1234',
     })
 
-    const user = await User.findBy('username', 'test')
+    await User.findByOrFail('username', 'test')
 
     response.assertStatus(200)
     response.assertRedirectsToRoute('home')
-    assert.exists(user)
   })
 
   test('should fail when username exists', async ({ client }) => {
