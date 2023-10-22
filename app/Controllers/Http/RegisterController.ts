@@ -17,11 +17,9 @@ export default class RegisterController {
 
     await new VerifyEmail(user).sendLater()
 
-    session.flash({
-      alert: {
-        type: 'success',
-        message: `Votre compte a été créé ! Vous allez recevoir un lien pour vérifier votre adresse e-mail.`,
-      },
+    session.flash('alert', {
+      type: 'success',
+      message: `Votre compte a été créé ! Vous allez recevoir un lien pour vérifier votre adresse e-mail.`,
     })
 
     return response.redirect().toRoute('home')

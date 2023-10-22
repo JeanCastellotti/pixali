@@ -12,18 +12,14 @@ export default class AuthController {
     try {
       await auth.attempt(email, password, true)
 
-      session.flash({
-        alert: {
-          type: 'success',
-          message: 'Vous êtes connecté',
-        },
+      session.flash('alert', {
+        type: 'success',
+        message: 'Vous êtes connecté.',
       })
     } catch (error) {
-      session.flash({
-        alert: {
-          type: 'error',
-          message: "Nous n'avons pas pu vous identifier",
-        },
+      session.flash('alert', {
+        type: 'error',
+        message: "Nous n'avons pas pu vous identifier.",
       })
 
       return response.redirect().back()
@@ -35,11 +31,9 @@ export default class AuthController {
   public async destroy({ auth, session, response }: HttpContextContract) {
     await auth.logout()
 
-    session.flash({
-      alert: {
-        type: 'success',
-        message: 'Vous avez été déconnecté',
-      },
+    session.flash('alert', {
+      type: 'success',
+      message: 'Vous avez été déconnecté.',
     })
 
     return response.redirect().toRoute('home')
