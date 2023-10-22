@@ -8,7 +8,7 @@ test.group('Auth register', (group) => {
     return () => Database.rollbackGlobalTransaction()
   })
 
-  test('should register a user', async ({ client, assert }) => {
+  test('should register a user', async ({ client }) => {
     const response = await client.post('/register').withCsrfToken().form({
       username: 'test',
       email: 'test@email.io',
