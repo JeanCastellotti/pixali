@@ -181,11 +181,20 @@ Encore.enablePostCssLoader()
 | sure to install the required dependencies.
 |
 */
-// Encore.enableVueLoader(() => {}, {
-//   version: 3,
-//   runtimeCompilerBuild: false,
-//   useJsx: false
-// })
+Encore.enableVueLoader(() => {}, {
+  version: 3,
+  runtimeCompilerBuild: false,
+  useJsx: false,
+})
+
+Encore.configureDefinePlugin((options) => {
+  options['__VUE_OPTIONS_API__'] = true
+  options['__VUE_PROD_DEVTOOLS__'] = false
+})
+
+Encore.addAliases({
+  '@': join(__dirname, 'resources/js'),
+})
 
 /*
 |--------------------------------------------------------------------------

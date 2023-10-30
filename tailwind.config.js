@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./resources/views/**/*.edge'],
+  content: ['./resources/**/*.{edge,vue}'],
   theme: {
     extend: {
       container: {
@@ -13,6 +13,9 @@ module.exports = {
           md: '768px',
           lg: '1024px',
         },
+      },
+      fontFamily: {
+        sans: ['Rubik', ...defaultTheme.fontFamily.sans],
       },
     },
   },
