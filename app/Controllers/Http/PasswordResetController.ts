@@ -5,19 +5,19 @@ import PasswordResetValidator from 'App/Validators/PasswordResetValidator'
 import PasswordResetEmail from 'App/Mailers/PasswordResetEmail'
 
 export default class PasswordResetController {
-  public async create({ params, view, session, response }: HttpContextContract) {
+  public async create({ params, inertia, session, response }: HttpContextContract) {
     const user = await User.findBy('password_reset_token', decodeURIComponent(params.token))
 
     if (!user || !Encryption.decrypt(user.passwordResetToken!)) {
       session.flash('alert', {
         type: 'error',
-        message: 'Le lien est invalide ou a expiré.',
+        message: 'Le lien est invalide ou a expiré',
       })
 
       return response.redirect().toRoute('password.forgot.create')
     }
 
-    return view.render('auth/reset-password', {
+    return inertia.render('auth/ResetPassword', {
       token: user.passwordResetToken,
       email: user.email,
     })
@@ -31,7 +31,7 @@ export default class PasswordResetController {
     if (!user) {
       session.flash('alert', {
         type: 'error',
-        message: 'Le lien est invalide ou a expiré.',
+        message: 'Le lien est invalide ou a expiré',
       })
 
       return response.redirect().toRoute('password.forgot.create')
@@ -43,7 +43,7 @@ export default class PasswordResetController {
 
     session.flash('alert', {
       type: 'success',
-      message: 'Votre mot de passe a été modifié.',
+      message: 'Votre mot de passe a été modifié',
     })
 
     return response.redirect().toRoute('auth.create')

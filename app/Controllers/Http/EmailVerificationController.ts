@@ -9,7 +9,7 @@ export default class EmailVerificationController {
 
     session.flash('alert', {
       type: 'info',
-      message: 'Un nouveau lien de vérification vous a été envoyé.',
+      message: 'Un nouveau lien de vérification vous a été envoyé',
     })
 
     return response.redirect().back()
@@ -21,7 +21,7 @@ export default class EmailVerificationController {
     if (!request.hasValidSignature()) {
       session.flash('alert', {
         type: 'error',
-        message: 'Le lien de vérification est invalide ou a expiré.',
+        message: 'Le lien est invalide ou a expiré',
       })
 
       return response.redirect().toRoute(redirectTo)
@@ -32,7 +32,7 @@ export default class EmailVerificationController {
     if (user.emailVerifiedAt) {
       session.flash('alert', {
         type: 'info',
-        message: 'Votre adresse e-mail a déjà été verifiée.',
+        message: 'Votre adresse e-mail a déjà été verifiée',
       })
 
       return response.redirect().toRoute(redirectTo)
@@ -44,7 +44,7 @@ export default class EmailVerificationController {
 
     session.flash('alert', {
       type: 'success',
-      message: 'Votre adresse e-mail a été vérifiée.',
+      message: 'Votre adresse e-mail a été vérifiée',
     })
 
     return response.redirect().toRoute(redirectTo)

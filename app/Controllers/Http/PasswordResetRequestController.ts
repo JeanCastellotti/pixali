@@ -6,8 +6,8 @@ import { string } from '@ioc:Adonis/Core/Helpers'
 import PasswordResetRequestEmail from 'App/Mailers/PasswordResetRequestEmail'
 
 export default class PasswordResetRequestController {
-  public create({ view }: HttpContextContract) {
-    return view.render('auth/forgot-password')
+  public create({ inertia }: HttpContextContract) {
+    return inertia.render('auth/ForgotPassword')
   }
 
   public async store({ request, session, response }: HttpContextContract) {
@@ -25,7 +25,7 @@ export default class PasswordResetRequestController {
 
     session.flash('alert', {
       type: 'info',
-      message: 'Vous allez recevoir un lien pour modifier votre mot de passe.',
+      message: 'Vous allez recevoir un lien pour modifier votre mot de passe',
     })
 
     return response.redirect().back()

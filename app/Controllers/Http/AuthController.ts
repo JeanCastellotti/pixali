@@ -2,24 +2,24 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import LoginValidator from 'App/Validators/LoginValidator'
 
 export default class AuthController {
-  public create({ view }: HttpContextContract) {
-    return view.render('auth/login')
+  public create({ inertia }: HttpContextContract) {
+    return inertia.render('auth/Login')
   }
 
   public async store({ request, auth, session, response }: HttpContextContract) {
-    const { email, password } = await request.validate(LoginValidator)
-
     try {
+      const { email, password } = await request.validate(LoginValidator)
+
       await auth.attempt(email, password, true)
 
       session.flash('alert', {
         type: 'success',
-        message: 'Vous êtes connecté.',
+        message: 'Vous êtes connecté',
       })
     } catch (error) {
       session.flash('alert', {
         type: 'error',
-        message: "Nous n'avons pas pu vous identifier.",
+        message: "Nous n'avons pas pu vous identifier",
       })
 
       return response.redirect().back()
@@ -33,7 +33,7 @@ export default class AuthController {
 
     session.flash('alert', {
       type: 'success',
-      message: 'Vous avez été déconnecté.',
+      message: 'Vous avez été déconnecté',
     })
 
     return response.redirect().toRoute('home')

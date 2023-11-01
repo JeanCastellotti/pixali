@@ -4,8 +4,8 @@ import User from 'App/Models/User'
 import RegisterValidator from 'App/Validators/RegisterValidator'
 
 export default class RegisterController {
-  public create({ view }: HttpContextContract) {
-    return view.render('auth/register')
+  public create({ inertia }: HttpContextContract) {
+    return inertia.render('auth/Register')
   }
 
   public async store({ request, auth, session, response }: HttpContextContract) {

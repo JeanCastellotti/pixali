@@ -1,6 +1,8 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.on('/').render('home').as('home')
+Route.get('/', ({ inertia }) => {
+  return inertia.render('Home')
+}).as('home')
 
 Route.get('/login', 'AuthController.create').as('auth.create').middleware('guest')
 Route.post('/login', 'AuthController.store').middleware('guest')
@@ -19,6 +21,14 @@ Route.post('/forgot-password', 'PasswordResetRequestController.store')
 Route.get('/reset-password/:token', 'PasswordResetController.create').as('password.reset.create')
 Route.post('/reset-password', 'PasswordResetController.store').as('password.reset.store')
 
-Route.get('/threads', ({ view }) => {
-  return view.render('threads/index')
+Route.get('/threads', ({ inertia }) => {
+  return inertia.render('Threads')
+})
+
+Route.get('/posts', ({ inertia }) => {
+  return inertia.render('Posts')
+})
+
+Route.get('/reviews', ({ inertia }) => {
+  return inertia.render('Reviews')
 })
