@@ -13,7 +13,7 @@ const user = computed(() => page.props.user)
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-900">
+  <div class="min-h-screen bg-slate-900 pb-10">
     <TheBanner v-if="user && !user.verified" />
     <TheHeader />
     <ToastList />

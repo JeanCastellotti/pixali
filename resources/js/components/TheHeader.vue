@@ -7,7 +7,7 @@ const user = computed(() => page.props.user)
 </script>
 
 <template>
-  <header class="mb-12">
+  <header class="sticky top-0 z-50 mb-6 bg-slate-900/90 backdrop-blur-lg">
     <div class="container flex items-center justify-between gap-12 py-6">
       <Link href="/" class="relative -top-0.5">
         <img src="/logo.png" alt="Logo Pixali" />
