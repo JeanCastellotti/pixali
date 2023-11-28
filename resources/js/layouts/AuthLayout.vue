@@ -18,7 +18,13 @@ import { HomeIcon } from '@heroicons/vue/24/solid'
             <HomeIcon class="h-6 w-6" />
           </Link>
         </div>
-    <slot />
+
+        <TheAlert
+          v-if="$page.props.alert"
+          @close="$page.props.alert = null"
+          v-bind="$page.props.alert"
+          class="mb-10" />
+        <slot />
       </div>
     </div>
   </div>
