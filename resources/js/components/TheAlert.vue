@@ -1,18 +1,35 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onUnmounted, ref, watchEffect } from 'vue'
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
   InformationCircleIcon,
   XCircleIcon,
 } from '@heroicons/vue/24/solid'
+import { router, usePage } from '@inertiajs/vue3'
 
-const props = defineProps(['type', 'message'])
+const page = usePage()
 
-defineEmits(['close'])
+const alert = ref(null)
+
+watchEffect(() => {
+  if (page.props.alert) {
+    alert.value = page.props.alert
+  }
+})
+
+function close() {
+  alert.value = null
+}
+
+onUnmounted(
+  router.on('navigate', () => {
+    alert.value = null
+  })
+)
 
 const color = computed(() => {
-  switch (props.type) {
+  switch (alert.value.type) {
     case 'success':
       return 'text-emerald-100 bg-emerald-500'
     case 'error':
@@ -23,7 +40,7 @@ const color = computed(() => {
 })
 
 const icon = computed(() => {
-  switch (props.type) {
+  switch (alert.value.type) {
     case 'success':
       return CheckCircleIcon
     case 'error':
@@ -35,17 +52,17 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center justify-between rounded p-4" :class="color">
+  <div v-if="alert" class="flex items-center justify-between gap-4 rounded p-4" :class="color">
     <div class="flex items-center gap-4">
       <span class="shrink-0">
         <component :is="icon" class="h-6 w-6" />
       </span>
       <span>
-        {{ message }}
+        {{ alert.message }}
       </span>
     </div>
     <XCircleIcon
-      @click="$emit('close')"
-      class="h-6 w-6 cursor-pointer opacity-50 transition hover:opacity-100" />
+      @click="close"
+      class="h-6 w-6 shrink-0 cursor-pointer opacity-50 transition hover:opacity-100" />
   </div>
 </template>

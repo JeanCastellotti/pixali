@@ -18,11 +18,7 @@ const user = computed(() => page.props.user)
     <TheHeader />
 
     <main class="container">
-      <TheAlert
-        v-if="$page.props.alert"
-        @close="$page.props.alert = null"
-        v-bind="$page.props.alert"
-        class="mb-16" />
+      <TheAlert class="mb-16" />
       <slot />
     </main>
   </div>
