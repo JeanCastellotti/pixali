@@ -4,7 +4,7 @@ export default defineConfig({
   /**
    * Path to the Edge view that will be used as the root view for Inertia responses
    */
-  rootView: 'inertia_layout',
+  rootView: 'app',
 
   /**
    * Data that should be shared with all rendered pages
@@ -18,6 +18,6 @@ export default defineConfig({
    */
   ssr: {
     enabled: true,
-    entrypoint: 'inertia/app/ssr.tsx'
-  }
+    entrypoint: 'inertia/app/ssr.tsx',
+  },
 })

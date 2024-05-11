@@ -1,18 +1,15 @@
 import { Head } from '@inertiajs/react'
 
-export default function Home(props: { version: number }) {
+function Home() {
   return (
     <>
-      <Head title="Homepage" />
+      <Head>
+        <title>Home</title>
+      </Head>
 
-      <div className="container">
-        <div className="title">AdonisJS {props.version} x Inertia x React</div>
-
-        <span>
-          Learn more about AdonisJS and Inertia.js by visiting the{' '}
-          <a href="https://docs.adonisjs.com/guides/inertia">AdonisJS documentation</a>.
-        </span>
-      </div>
+      <h1 className="font-bold">Home</h1>
     </>
   )
 }
+
+export default Home
