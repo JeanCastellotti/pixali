@@ -5,10 +5,10 @@ export default function render(page: any) {
   return createInertiaApp({
     page,
     render: ReactDOMServer.renderToString,
-    title: (title) => `${title} - Pixali`,
+    title: (title) => (title ? `${title} - Pixali` : 'Pixali'),
     resolve: (name) => {
-      const pages = import.meta.glob('../pages/**/*.tsx', { eager: true })
-      return pages[`../pages/${name}.tsx`]
+      const pages = import.meta.glob('./pages/**/*.tsx', { eager: true })
+      return pages[`./pages/${name}.tsx`]
     },
     setup: ({ App, props }) => <App {...props} />,
   })
