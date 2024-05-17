@@ -22,7 +22,7 @@ function Login() {
   return (
     <>
       <Head>
-        <title>Créer un compte</title>
+        <title>Se connecter</title>
       </Head>
 
       <div className="flex flex-col items-center">
