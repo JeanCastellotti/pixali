@@ -25,3 +25,5 @@ router.post('/register', [RegisterController, 'store']).as('register.store').use
 
 router.get('/login', [LoginController, 'create']).as('login.create').use(middleware.guest())
 router.post('/login', [LoginController, 'store']).as('login.store').use(middleware.guest())
+
+router.post('/logout', [LogoutController])
