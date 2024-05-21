@@ -14,6 +14,7 @@ const LogoutController = () => import('#controllers/auth/logout_controller')
 const RegisterController = () => import('#controllers/auth/register_controller')
 const HomeController = () => import('#controllers/home_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
+const EmailVerificationController = () => import('#controllers/auth/email_verification_controller')
 
 router.get('/', [HomeController]).as('home')
 
@@ -27,3 +28,5 @@ router.get('/login', [LoginController, 'create']).as('login.create').use(middlew
 router.post('/login', [LoginController, 'store']).as('login.store').use(middleware.guest())
 
 router.post('/logout', [LogoutController])
+
+router.get('/verify/:email', [EmailVerificationController, 'verify']).as('email.verify')
