@@ -9,11 +9,15 @@ export default class RegisterController {
     return inertia.render('auth/register')
   }
 
-  async store({ request, auth, response }: HttpContext) {
+  async store({ request, auth, session, response }: HttpContext) {
     const payload = await request.validateUsing(createUserValidator)
     const user = await User.create(payload)
     await auth.use('web').login(user, true)
     await mail.sendLater(new VerifyEmailNotification(user))
+    session.flash('notification', {
+      type: 'success',
+      message: 'Votre compte a été créé.',
+    })
     response.redirect().toRoute('home')
   }
 }
