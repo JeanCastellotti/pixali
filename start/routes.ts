@@ -29,4 +29,5 @@ router.post('/login', [LoginController, 'store']).as('login.store').use(middlewa
 
 router.post('/logout', [LogoutController])
 
+router.post('/verify', [EmailVerificationController, 'send']).as('email.send')
 router.get('/verify/:email', [EmailVerificationController, 'verify']).as('email.verify')
