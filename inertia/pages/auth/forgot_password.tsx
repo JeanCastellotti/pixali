@@ -14,9 +14,7 @@ function ForgotPassword() {
 
   return (
     <>
-      <Head>
-        <title>Mot de passe oublié</title>
-      </Head>
+      <Head title="Mot de passe oublié" />
 
       <h1 className="mb-6 text-4xl font-medium text-slate-700">Mot de passe oublié</h1>
 

@@ -22,9 +22,7 @@ function Register() {
 
   return (
     <>
-      <Head>
-        <title>Créer un compte</title>
-      </Head>
+      <Head title="Créer un compte" />
 
       <div className="flex flex-col items-center">
         <h1 className="text-4xl font-medium text-slate-700">Créer un compte</h1>

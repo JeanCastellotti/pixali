@@ -21,9 +21,7 @@ function Login() {
 
   return (
     <>
-      <Head>
-        <title>Se connecter</title>
-      </Head>
+      <Head title="Se connecter" />
 
       <div className="flex flex-col items-center">
         <h1 className="text-4xl font-medium text-slate-700">Se connecter</h1>

@@ -3,9 +3,7 @@ import { Head } from '@inertiajs/react'
 function Home() {
   return (
     <>
-      <Head>
-        <title>Home</title>
-      </Head>
+      <Head title="Home" />
 
       <h1 className="font-bold">Home</h1>
     </>
