@@ -7,7 +7,7 @@ function Login() {
   const form = useForm({
     email: '',
     password: '',
-    remember: false,
+    remember: true,
   })
 
   function submit(e: React.FormEvent) {
