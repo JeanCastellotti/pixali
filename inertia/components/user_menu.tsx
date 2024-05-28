@@ -4,7 +4,7 @@ import {
   ChatBubbleLeftRightIcon,
   ChevronDownIcon,
   DocumentTextIcon,
-  EllipsisHorizontalIcon,
+  // EllipsisHorizontalIcon,
   InboxIcon,
   StarIcon,
   UserIcon,

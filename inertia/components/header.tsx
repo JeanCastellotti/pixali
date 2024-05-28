@@ -36,24 +36,24 @@ function Header() {
           </Link>
         </nav>
 
-          {props.user ? (
-            <UserMenu user={props.user} />
-          ) : (
+        {props.user ? (
+          <UserMenu user={props.user} />
+        ) : (
           <div className="flex gap-2">
-              <Link
-                href="/login"
-                className="rounded border border-slate-600 bg-slate-500 px-2 py-1.5 text-sm text-white transition hover:opacity-80"
-              >
-                Se connecter
-              </Link>
-              <Link
-                href="/register"
-                className="rounded border border-amber-600 bg-amber-500 px-2 py-1.5 text-sm text-white transition hover:opacity-80"
-              >
-                Créer un compte
-              </Link>
+            <Link
+              href="/login"
+              className="rounded bg-slate-200 px-2.5 py-1.5 text-sm text-slate-800 transition hover:opacity-80"
+            >
+              Se connecter
+            </Link>
+            <Link
+              href="/register"
+              className="rounded bg-amber-500 px-2.5 py-1.5 text-sm text-white transition hover:opacity-80"
+            >
+              Créer un compte
+            </Link>
           </div>
-          )}
+        )}
       </div>
     </header>
   )
