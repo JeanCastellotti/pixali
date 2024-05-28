@@ -9,24 +9,22 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+
+const HomeController = () => import('#controllers/home_controller')
+const RegisterController = () => import('#controllers/auth/register_controller')
+const SessionController = () => import('#controllers/auth/session_controller')
+const EmailVerificationController = () => import('#controllers/auth/email_verification_controller')
 const PasswordResetRequestController = () =>
   import('#controllers/auth/password_reset_request_controller')
-const LogoutController = () => import('#controllers/auth/logout_controller')
-
-const RegisterController = () => import('#controllers/auth/register_controller')
-const HomeController = () => import('#controllers/home_controller')
-const LoginController = () => import('#controllers/auth/login_controller')
-const EmailVerificationController = () => import('#controllers/auth/email_verification_controller')
 
 router.get('/', [HomeController]).as('home')
 
 router.get('register', [RegisterController, 'create']).as('register.create').use(middleware.guest())
 router.post('register', [RegisterController, 'store']).as('register.store').use(middleware.guest())
 
-router.get('login', [LoginController, 'create']).as('login.create').use(middleware.guest())
-router.post('login', [LoginController, 'store']).as('login.store').use(middleware.guest())
-
-router.post('logout', [LogoutController])
+router.get('login', [SessionController, 'create']).as('session.create').use(middleware.guest())
+router.post('login', [SessionController, 'store']).as('session.store').use(middleware.guest())
+router.post('logout', [SessionController, 'destroy']).as('session.destroy').use(middleware.auth())
 
 router.post('verify', [EmailVerificationController, 'send']).as('email.send')
 router.get('verify/:email', [EmailVerificationController, 'verify']).as('email.verify')

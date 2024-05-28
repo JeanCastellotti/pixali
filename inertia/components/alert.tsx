@@ -8,35 +8,35 @@ import {
 } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 
-type InertiaNotification = {
+type InertiaAlert = {
   type: 'success' | 'error' | 'info'
   message: string
 }
 
-function Notification() {
-  const notification = usePage().props.notification as InertiaNotification
+function Alert() {
+  const alert = usePage().props.alert as InertiaAlert
 
-  const [show, setShow] = useState(!!notification)
+  const [show, setShow] = useState(!!alert)
 
   useEffect(() => {
-    if (notification) {
+    if (alert) {
       setShow(true)
     }
-  }, [notification])
+  }, [alert])
 
-  if (!notification) return
+  if (!alert) return
 
   const classNames = {
     success: 'text-emerald-600 bg-emerald-100 border-emerald-200',
     error: 'text-red-600 bg-red-100 border-red-200',
     info: 'text-sky-600 bg-sky-100 border-sky-200',
-  }[notification.type]
+  }[alert.type]
 
   const icon = {
-    success: <CheckCircleIcon className="size-6" />,
-    error: <ExclamationCircleIcon className="size-6" />,
-    info: <InformationCircleIcon className="size-6" />,
-  }[notification.type]
+    success: <CheckCircleIcon className="size-6 fill-current" />,
+    error: <ExclamationCircleIcon className="size-6 fill-current" />,
+    info: <InformationCircleIcon className="size-6 fill-current" />,
+  }[alert.type]
 
   function close() {
     setShow(false)
@@ -52,15 +52,15 @@ function Notification() {
       >
         <div className="flex items-center gap-4">
           <span className="shrink-0" children={icon} />
-          <span>{notification.message}</span>
+          <span>{alert.message}</span>
         </div>
         <XCircleIcon
           onClick={close}
-          className="size-6 shrink-0 cursor-pointer opacity-50 transition hover:opacity-100"
+          className="size-6 shrink-0 cursor-pointer fill-current opacity-50 transition hover:opacity-100"
         />
       </div>
     )
   )
 }
 
-export default Notification
+export default Alert

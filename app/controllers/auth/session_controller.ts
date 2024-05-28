@@ -1,7 +1,7 @@
 import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class LoginController {
+export default class SessionController {
   create({ inertia }: HttpContext) {
     return inertia.render('auth/login')
   }
@@ -13,9 +13,20 @@ export default class LoginController {
 
     await auth.use('web').login(user, !!request.input('remember'))
 
-    session.flash('notification', {
+    session.flash('alert', {
       type: 'success',
       message: 'Vous êtes connecté.',
+    })
+
+    return response.redirect().toRoute('home')
+  }
+
+  async destroy({ auth, session, response }: HttpContext) {
+    await auth.use('web').logout()
+
+    session.flash('alert', {
+      type: 'success',
+      message: 'Vous avez été déconnecté.',
     })
 
     return response.redirect().toRoute('home')

@@ -8,19 +8,22 @@ import { DateTime } from 'luxon'
 export default class EmailVerificationController {
   async send({ auth, session, response }: HttpContext) {
     assertExists(auth.user)
+
     await mail.sendLater(new VerifyEmailNotification(auth.user))
-    session.flash('notification', {
+
+    session.flash('alert', {
       type: 'info',
       message: 'Un nouveau lien de vérification vous a été envoyé.',
     })
-    response.redirect().back()
+
+    return response.redirect().back()
   }
 
   async verify({ request, auth, params, session, response }: HttpContext) {
-    const redirectTo = auth.isAuthenticated ? 'home' : 'login.create'
+    const redirectTo = auth.isAuthenticated ? 'home' : 'session.create'
 
     if (!request.hasValidSignature()) {
-      session.flash('notification', {
+      session.flash('alert', {
         type: 'error',
         message: 'Le lien est invalide ou a expiré.',
       })
@@ -31,7 +34,7 @@ export default class EmailVerificationController {
     const user = auth.user ?? (await User.findByOrFail('email', params.email))
 
     if (user.emailVerifiedAt) {
-      session.flash('notification', {
+      session.flash('alert', {
         type: 'info',
         message: 'Votre adresse e-mail a déjà été verifiée.',
       })
@@ -43,11 +46,11 @@ export default class EmailVerificationController {
 
     await user.save()
 
-    session.flash('notification', {
+    session.flash('alert', {
       type: 'success',
       message: 'Votre adresse e-mail a été vérifiée.',
     })
 
-    response.redirect().toRoute(redirectTo)
+    return response.redirect().toRoute(redirectTo)
   }
 }
