@@ -36,11 +36,10 @@ function Header() {
           </Link>
         </nav>
 
-        <div className="flex gap-3">
           {props.user ? (
             <UserMenu user={props.user} />
           ) : (
-            <>
+          <div className="flex gap-2">
               <Link
                 href="/login"
                 className="rounded border border-slate-600 bg-slate-500 px-2 py-1.5 text-sm text-white transition hover:opacity-80"
@@ -53,9 +52,8 @@ function Header() {
               >
                 Créer un compte
               </Link>
-            </>
+          </div>
           )}
-        </div>
       </div>
     </header>
   )
