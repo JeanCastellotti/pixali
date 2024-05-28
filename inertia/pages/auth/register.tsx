@@ -50,7 +50,7 @@ function Register() {
             )}
           />
           {form.errors.username && (
-            <span className="flex items-center gap-2 text-sm text-red-500">
+            <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.username}
             </span>
           )}
@@ -71,7 +71,7 @@ function Register() {
             )}
           />
           {form.errors.email && (
-            <span className="flex items-center gap-2 text-sm text-red-500">
+            <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.email}
             </span>
           )}
@@ -92,7 +92,7 @@ function Register() {
             )}
           />
           {form.errors.password && (
-            <span className="flex items-center gap-2 text-sm text-red-500">
+            <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.password}
             </span>
           )}
