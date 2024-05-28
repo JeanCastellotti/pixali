@@ -12,6 +12,9 @@ function Login() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
+
+    if (form.processing) return
+
     form.post('/login', {
       onError: () => {
         form.reset('password')

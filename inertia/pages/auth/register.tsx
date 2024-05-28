@@ -13,6 +13,8 @@ function Register() {
   function submit(e: React.FormEvent) {
     e.preventDefault()
 
+    if (form.processing) return
+
     form.post('/register', {
       onError: () => {
         form.reset('password')
