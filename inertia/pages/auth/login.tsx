@@ -48,11 +48,6 @@ function Login() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          {form.errors.email && (
-            <span className="flex items-center gap-2 text-sm text-red-500">
-              {form.errors.email}
-            </span>
-          )}
         </Field>
 
         <Field className="flex flex-col">
@@ -74,11 +69,6 @@ function Login() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          {form.errors.password && (
-            <span className="flex items-center gap-2 text-sm text-red-500">
-              {form.errors.password}
-            </span>
-          )}
         </Field>
 
         <Field className="flex items-center gap-2">
