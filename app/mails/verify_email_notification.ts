@@ -4,7 +4,6 @@ import router from '@adonisjs/core/services/router'
 import { BaseMail } from '@adonisjs/mail'
 
 export default class VerifyEmailNotification extends BaseMail {
-  from = env.get('APP_EMAIL')
   subject = 'Vérification de votre adresse e-mail'
 
   constructor(private user: User) {

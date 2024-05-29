@@ -5,6 +5,16 @@ const mailConfig = defineConfig({
   default: 'smtp',
 
   /**
+   * A static address for the "from" property. It will be
+   * used unless an explicit from address is set on the
+   * Email
+   */
+  from: {
+    address: env.get('APP_EMAIL'),
+    name: env.get('APP_NAME'),
+  },
+
+  /**
    * The mailers object can be used to configure multiple mailers
    * each using a different transport or same transport with different
    * options.
