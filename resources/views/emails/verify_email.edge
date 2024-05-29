@@ -1,14 +1,29 @@
 @mjml()
-<mjml>
-  <mj-body>
-    <mj-section>
-      <mj-column>
-        <mj-text>Hello {{ username }}</mj-text>
-        <mj-text>Merci d'être membre de la communauté Pixali ! Pour assurer la sécurité de votre compte, nous vous demandons de bien vouloir prendre une seconde pour vérifier votre adresse e-mail.</mj-text>
-        <mj-text>Pour compléter le processus de vérification, veuillez cliquer sur le lien ci-dessous.</mj-text>
-        <mj-button href="{{ emailVerificationURL }}">Confirmer l'adresse e-mail</mj-button>
-      </mj-column>
-    </mj-section>
-  </mj-body>
-</mjml>
+  <mjml>
+    <mj-body background-color="#f1f5f9">
+      <mj-section padding="20px">
+        <mj-column>
+          <mj-section background-color="#ffffff" padding="20px" border-radius="8px">
+            <mj-column>
+              <mj-text color="#1e293b">
+                Bonjour <strong>{{ username }}</strong> !
+              </mj-text>
+              <mj-text color="#1e293b">
+                Nous sommes ravis de vous compter parmi nous.
+              </mj-text>
+              <mj-text color="#1e293b">
+                Pour accéder à toutes les fonctionnalités proposées par notre site, veuillez vérifier votre adresse e-mail.
+              </mj-text>
+              <mj-button               
+                background-color="#f59e0b" 
+                color="#ffffff" 
+                href="{{ emailVerificationURL }}">
+                Confirmer l'adresse e-mail
+              </mj-button>
+            </mj-column>
+          </mj-section>
+        </mj-column>
+      </mj-section>
+    </mj-body>
+  </mjml>
 @end
