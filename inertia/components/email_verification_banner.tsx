@@ -28,7 +28,7 @@ function EmailVerificationBanner() {
           method="post"
           className="rounded bg-slate-100 px-2.5 py-1.5 text-xs text-slate-800 transition hover:opacity-80"
         >
-          <span>Envoyer un nouveau lien</span>
+          Envoyer un nouveau lien
         </Link>
       </div>
     </div>
