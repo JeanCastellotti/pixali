@@ -9,6 +9,15 @@ export default class EmailVerificationController {
   async send({ auth, session, response }: HttpContext) {
     assertExists(auth.user)
 
+    if (auth.user.emailVerifiedAt) {
+      session.flash('alert', {
+        type: 'info',
+        message: 'Votre adresse e-mail a déjà été verifiée.',
+      })
+
+      return response.redirect().back()
+    }
+
     await mail.sendLater(new VerifyEmailNotification(auth.user))
 
     session.flash('alert', {
