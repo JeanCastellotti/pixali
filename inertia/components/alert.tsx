@@ -1,11 +1,6 @@
 import { usePage } from '@inertiajs/react'
 import clsx from 'clsx'
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  InformationCircleIcon,
-  XCircleIcon,
-} from '@heroicons/react/24/solid'
+import { Icon } from '@iconify/react'
 import { useEffect, useState } from 'react'
 
 type InertiaAlert = {
@@ -33,9 +28,9 @@ function Alert() {
   }[alert.type]
 
   const icon = {
-    success: <CheckCircleIcon className="size-6 fill-current" />,
-    error: <ExclamationCircleIcon className="size-6 fill-current" />,
-    info: <InformationCircleIcon className="size-6 fill-current" />,
+    success: <Icon icon="heroicons:check-circle" className="size-6 fill-current" />,
+    error: <Icon icon="heroicons:exclamation-circle" className="size-6 fill-current" />,
+    info: <Icon icon="heroicons:information-circle" className="size-6 fill-current" />,
   }[alert.type]
 
   function close() {
@@ -46,7 +41,7 @@ function Alert() {
     show && (
       <div
         className={clsx(
-          'mx-auto mb-6 flex max-w-screen-sm items-center justify-between gap-4 rounded-lg border p-4',
+          'mx-auto mb-6 flex w-full max-w-screen-sm items-center justify-between gap-4 rounded-lg border p-4',
           classNames
         )}
       >
@@ -54,7 +49,8 @@ function Alert() {
           <span className="shrink-0" children={icon} />
           <span>{alert.message}</span>
         </div>
-        <XCircleIcon
+        <Icon
+          icon="heroicons:x-circle"
           onClick={close}
           className="size-6 shrink-0 cursor-pointer fill-current opacity-50 transition hover:opacity-100"
         />

@@ -1,30 +1,40 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import {
-  ArrowRightStartOnRectangleIcon,
-  ChatBubbleLeftRightIcon,
-  ChevronDownIcon,
-  DocumentTextIcon,
-  // EllipsisHorizontalIcon,
-  InboxIcon,
-  StarIcon,
-  UserIcon,
-} from '@heroicons/react/16/solid'
-import { Link } from '@inertiajs/react'
+import { Icon } from '@iconify/react'
+import { Link, usePage } from '@inertiajs/react'
 
-type Props = {
-  user: Record<string, any>
-}
+function UserMenu() {
+  const { user } = usePage().props
 
-function UserMenu({ user }: Props) {
+  if (!user) {
+    return (
+      <div className="flex gap-2">
+        <Link
+          href="/login"
+          className="rounded bg-slate-200 px-2.5 py-1.5 text-sm text-slate-800 transition hover:opacity-80"
+        >
+          Se connecter
+        </Link>
+        <Link
+          href="/register"
+          className="rounded bg-amber-500 px-2.5 py-1.5 text-sm text-white transition hover:opacity-80"
+        >
+          Créer un compte
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <Menu>
       <MenuButton className="flex items-center gap-2 rounded-md px-2 py-1.5 data-[hover]:bg-slate-100 data-[open]:bg-slate-200">
         <img
+          // @ts-expect-error
           src={`https://avatar.iran.liara.run/username?username=${user.username}`}
           className="mr-2 size-8 rounded-full object-cover"
         />
+        {/* @ts-expect-error */}
         <span className="text-sm text-slate-800">{user.username}</span>
-        <ChevronDownIcon className="size-4 fill-slate-500" />
+        <Icon icon="heroicons:chevron-down" className="size-4 fill-slate-500" />
       </MenuButton>
       <Transition
         enter="transition ease-out duration-75"
@@ -43,7 +53,7 @@ function UserMenu({ user }: Props) {
               href=""
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
-              <UserIcon className="size-4 fill-slate-800" />
+              <Icon icon="heroicons:user-16-solid" className="size-4 fill-slate-800" />
               <span>Profil</span>
             </Link>
           </MenuItem>
@@ -52,7 +62,7 @@ function UserMenu({ user }: Props) {
               href=""
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
-              <DocumentTextIcon className="size-4 fill-slate-800" />
+              <Icon icon="heroicons:document-text-16-solid" className="size-4 fill-slate-800" />
               <span>Articles</span>
             </Link>
           </MenuItem>
@@ -61,7 +71,7 @@ function UserMenu({ user }: Props) {
               href=""
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
-              <StarIcon className="size-4 fill-slate-800" />
+              <Icon icon="heroicons:star-16-solid" className="size-4 fill-slate-800" />
               <span>Tests</span>
             </Link>
           </MenuItem>
@@ -70,7 +80,10 @@ function UserMenu({ user }: Props) {
               href=""
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
-              <ChatBubbleLeftRightIcon className="size-4 fill-slate-800" />
+              <Icon
+                icon="heroicons:chat-bubble-left-right-16-solid"
+                className="size-4 fill-slate-800"
+              />
               <span>Discussions</span>
             </Link>
           </MenuItem>
@@ -79,7 +92,7 @@ function UserMenu({ user }: Props) {
               href=""
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
-              <InboxIcon className="size-4 fill-slate-800" />
+              <Icon icon="heroicons:inbox-16-solid" className="size-4 fill-slate-800" />
               <span>Messages</span>
               <div className=" flex aspect-square size-5 items-center justify-center rounded-full bg-amber-500 text-xs text-amber-50">
                 20
@@ -94,7 +107,10 @@ function UserMenu({ user }: Props) {
               method="post"
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-red-500 transition hover:bg-red-50"
             >
-              <ArrowRightStartOnRectangleIcon className="size-4 fill-red-500" />
+              <Icon
+                icon="heroicons:arrow-right-start-on-rectangle-16-solid"
+                className="size-4 fill-red-500"
+              />
               <span>Se déconnecter</span>
             </Link>
           </MenuItem>

@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react'
-import { ShieldExclamationIcon } from '@heroicons/react/24/solid'
+import { Icon } from '@iconify/react'
 
 type InertiaUser = {
   id: number
@@ -20,7 +20,7 @@ function EmailVerificationBanner() {
   return (
     <div className="bg-slate-800 py-3">
       <div className="container flex items-center justify-center gap-6">
-        <ShieldExclamationIcon className="size-6 fill-slate-100" />
+        <Icon icon="heroicons:shield-exclamation" className="size-6 fill-slate-100" />
         <span className="text-sm text-slate-100">Votre adresse e-mail n'a pas été vérifiée.</span>
         <Link
           href="/verify"
