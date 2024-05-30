@@ -1,0 +1,29 @@
+@mjml({
+  fonts: {
+    Rubik: 'https://fonts.bunny.net/css?family=rubik:400,500,700'
+  }
+})
+  <mjml>
+    <mj-body background-color="#f1f5f9">
+      <mj-section padding="20px">
+        <mj-column>
+          <mj-section background-color="#ffffff" padding="20px 0" border-radius="8px">
+            <mj-column>
+              {{{ await $slots.main() }}}
+              <mj-divider 
+                border-width="1px" 
+                border-style="solid" 
+                border-color="#f1f5f9" />
+              <mj-text 
+                color="#64748b" 
+                align="center"
+                font-family="Rubik, Helvetica, Arial, sans-serif">
+                {{ env('APP_NAME') }} &mdash; {{ new Date().getFullYear() }}
+              </mj-text>
+            </mj-column>
+          </mj-section>
+        </mj-column>
+      </mj-section>
+    </mj-body>
+  </mjml>
+@end
