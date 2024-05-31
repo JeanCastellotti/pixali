@@ -1,7 +1,7 @@
-import User from '#models/user'
-import env from '#start/env'
-import router from '@adonisjs/core/services/router'
 import { BaseMail } from '@adonisjs/mail'
+import router from '@adonisjs/core/services/router'
+import env from '#start/env'
+import type User from '#models/user'
 
 export default class VerifyEmailNotification extends BaseMail {
   subject = 'Vérification de votre adresse e-mail'
@@ -16,7 +16,7 @@ export default class VerifyEmailNotification extends BaseMail {
       .prefixUrl(env.get('APP_URL'))
       .params({ email: this.user.email })
       .makeSigned('email.verify', {
-        expiresIn: '30m',
+        expiresIn: '24h',
       })
 
     this.message.to(this.user.email)
