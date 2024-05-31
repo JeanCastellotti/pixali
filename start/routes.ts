@@ -14,6 +14,7 @@ const HomeController = () => import('#controllers/home_controller')
 const RegisterController = () => import('#controllers/auth/register_controller')
 const SessionController = () => import('#controllers/auth/session_controller')
 const EmailVerificationController = () => import('#controllers/auth/email_verification_controller')
+const PasswordResetController = () => import('#controllers/auth/password_reset_controller')
 const PasswordResetRequestController = () =>
   import('#controllers/auth/password_reset_request_controller')
 
@@ -32,7 +33,9 @@ router.get('verify/:email', [EmailVerificationController, 'verify']).as('email.v
 router
   .get('forgot-password', [PasswordResetRequestController, 'create'])
   .as('password.forgot.create')
-
 router
   .post('forgot-password', [PasswordResetRequestController, 'store'])
   .as('password.forgot.store')
+
+router.get('reset-password/:token', [PasswordResetController, 'create']).as('password.reset.create')
+router.post('reset-password', [PasswordResetController, 'store']).as('password.reset.store')

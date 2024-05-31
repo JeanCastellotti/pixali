@@ -10,6 +10,14 @@ function ForgotPassword() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
+
+    if (form.processing) return
+
+    form.post('/forgot-password', {
+      onFinish() {
+        form.reset()
+      },
+    })
   }
 
   return (
@@ -33,11 +41,11 @@ function ForgotPassword() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          {/* {form.errors.email && (
-            <span className="flex items-center gap-2 text-sm text-red-500">
+          {form.errors.email && (
+            <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.email}
             </span>
-          )} */}
+          )}
         </Field>
 
         <Button
@@ -45,7 +53,7 @@ function ForgotPassword() {
           disabled={form.processing}
           className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg font-medium text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          {form.processing ? <Spinner text="Connexion" /> : 'Réinitialiser mon mot de passe'}
+          {form.processing ? <Spinner text="Connexion" /> : 'Réinitialiser mot de passe'}
         </Button>
       </form>
     </>
