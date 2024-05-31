@@ -28,9 +28,9 @@ function Alert() {
   }[alert.type]
 
   const icon = {
-    success: <Icon icon="heroicons:check-circle" className="size-6 fill-current" />,
-    error: <Icon icon="heroicons:exclamation-circle" className="size-6 fill-current" />,
-    info: <Icon icon="heroicons:information-circle" className="size-6 fill-current" />,
+    success: 'heroicons:check-circle',
+    error: 'heroicons:exclamation-circle',
+    info: 'heroicons:information-circle',
   }[alert.type]
 
   function close() {
@@ -46,13 +46,13 @@ function Alert() {
         )}
       >
         <div className="flex items-center gap-4">
-          <span className="shrink-0" children={icon} />
+          <Icon icon={icon} className="size-6 shrink-0" />
           <span>{alert.message}</span>
         </div>
         <Icon
           icon="heroicons:x-circle"
           onClick={close}
-          className="size-6 shrink-0 cursor-pointer fill-current opacity-50 transition hover:opacity-100"
+          className="size-6 shrink-0 cursor-pointer opacity-50 transition hover:opacity-100"
         />
       </div>
     )

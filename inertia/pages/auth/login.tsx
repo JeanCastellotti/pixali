@@ -40,8 +40,8 @@ function Login() {
         <Field className="flex flex-col">
           <Label className="text-slate-700">Adresse e-mail</Label>
           <Input
-            type="email"
             required
+            type="email"
             value={form.data.email}
             onChange={(e) => form.setData('email', e.target.value)}
             className={clsx(
@@ -61,8 +61,8 @@ function Login() {
             </Link>
           </div>
           <Input
-            type="password"
             required
+            type="password"
             value={form.data.password}
             onChange={(e) => form.setData('password', e.target.value)}
             className={clsx(

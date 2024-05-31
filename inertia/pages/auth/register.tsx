@@ -16,7 +16,7 @@ function Register() {
     if (form.processing) return
 
     form.post('/register', {
-      onError: () => {
+      onFinish: () => {
         form.reset('password')
       },
     })
