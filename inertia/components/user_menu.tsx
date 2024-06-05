@@ -1,11 +1,12 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import { Link, usePage } from '@inertiajs/react'
+import type { SharedProps } from '@adonisjs/inertia/types'
 
 function UserMenu() {
-  const { user } = usePage().props
+  const { authenticated } = usePage<SharedProps>().props
 
-  if (!user) {
+  if (!authenticated) {
     return (
       <div className="flex gap-2">
         <Link
@@ -26,14 +27,22 @@ function UserMenu() {
 
   return (
     <Menu>
-      <MenuButton className="flex items-center gap-2 rounded-md px-2 py-1.5 data-[hover]:bg-slate-100 data-[open]:bg-slate-200">
-        <img
-          // @ts-expect-error
-          src={`https://avatar.iran.liara.run/username?username=${user.username}`}
-          className="mr-2 size-8 rounded-full object-cover"
-        />
-        {/* @ts-expect-error */}
-        <span className="text-sm text-slate-800">{user.username}</span>
+      <MenuButton className="relative flex items-center gap-2 rounded-md px-2 py-1.5 data-[hover]:bg-slate-100 data-[open]:bg-slate-200">
+        <div className="relative">
+          <img
+            src={
+              authenticated.avatar
+                ? authenticated.avatar
+                : `https://avatar.iran.liara.run/username?username=${authenticated.username}`
+            }
+            className="mr-2 size-8 rounded-full object-cover"
+          />
+          <div className="absolute -top-0.5 right-1 flex size-3">
+            <div className="absolute size-full rounded-full bg-amber-500 opacity-75"></div>
+            <div className="relative size-3 rounded-full border-2 border-white bg-amber-500"></div>
+          </div>
+        </div>
+        <span className="text-sm text-slate-800">{authenticated.username}</span>
         <Icon icon="heroicons:chevron-down-16-solid" className="size-4 text-slate-800" />
       </MenuButton>
       <Transition
@@ -50,7 +59,7 @@ function UserMenu() {
         >
           <MenuItem>
             <Link
-              href=""
+              href="/profile"
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
               <Icon icon="heroicons:user-16-solid" className="size-4 text-slate-800" />
@@ -95,7 +104,7 @@ function UserMenu() {
               <Icon icon="heroicons:inbox-16-solid" className="size-4 text-slate-800" />
               <div className="flex items-center gap-2">
                 <span>Messages</span>
-                <div className=" flex aspect-square size-5 items-center justify-center rounded-full bg-amber-500 text-xs text-amber-50">
+                <div className="flex aspect-square size-5 items-center justify-center rounded-full bg-amber-500 text-xs text-amber-50">
                   20
                   {/* <EllipsisHorizontalIcon className="size-4 text-amber-50" /> */}
                 </div>

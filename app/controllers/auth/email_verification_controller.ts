@@ -9,7 +9,7 @@ export default class EmailVerificationController {
   async send({ auth, session, response }: HttpContext) {
     assertExists(auth.user)
 
-    if (auth.user.emailVerifiedAt) {
+    if (auth.user.emailVerified) {
       session.flash('alert', {
         type: 'info',
         message: 'Votre adresse e-mail a déjà été verifiée.',
@@ -42,7 +42,7 @@ export default class EmailVerificationController {
 
     const user = auth.user ?? (await User.findByOrFail('email', params.email))
 
-    if (user.emailVerifiedAt) {
+    if (user.emailVerified) {
       session.flash('alert', {
         type: 'info',
         message: 'Votre adresse e-mail a déjà été verifiée.',
@@ -51,6 +51,7 @@ export default class EmailVerificationController {
       return response.redirect().toRoute(redirectTo)
     }
 
+    user.emailVerified = true
     user.emailVerifiedAt = DateTime.now()
 
     await user.save()

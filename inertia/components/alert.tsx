@@ -2,14 +2,10 @@ import { usePage } from '@inertiajs/react'
 import clsx from 'clsx'
 import { Icon } from '@iconify/react'
 import { useEffect, useState } from 'react'
-
-type InertiaAlert = {
-  type: 'success' | 'error' | 'info'
-  message: string
-}
+import type { SharedProps } from '@adonisjs/inertia/types'
 
 function Alert() {
-  const alert = usePage().props.alert as InertiaAlert
+  const { alert } = usePage<SharedProps>().props
 
   const [show, setShow] = useState(!!alert)
 

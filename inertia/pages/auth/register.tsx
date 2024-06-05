@@ -1,7 +1,7 @@
 import { Head, Link, useForm } from '@inertiajs/react'
 import { Button, Field, Input, Label } from '@headlessui/react'
-import Spinner from '~/components/spinner'
 import clsx from 'clsx'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 function Register() {
   const form = useForm({
@@ -103,10 +103,30 @@ function Register() {
         <Button
           type="submit"
           disabled={form.processing}
-          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg font-medium text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
+          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          {form.processing ? <Spinner text="Création" /> : 'Créer un compte'}
+          {form.processing ? (
+            <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
+          ) : (
+            'Créer un compte'
+          )}
         </Button>
+
+        <div className="flex items-center gap-5">
+          <div className="w-full border-b border-slate-200"></div>
+          <span className="font-semibold text-slate-500">ou</span>
+          <div className="w-full border-b border-slate-200"></div>
+        </div>
+
+        <a
+          href="/discord/redirect"
+          className="flex items-center justify-center gap-4 rounded bg-[#7289da] p-2.5 text-white transition hover:opacity-90"
+        >
+          <div className="rounded-full bg-white p-2 transition hover:scale-105">
+            <Icon icon="simple-icons:discord" className="size-6 text-[#7289da]" />
+          </div>
+          <span>Se connecter avec Discord</span>
+        </a>
       </form>
     </>
   )

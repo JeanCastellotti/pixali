@@ -1,3 +1,7 @@
+/// <reference path="../adonisrc.ts" />
+/// <reference path="../config/auth.ts" />
+/// <reference path="../config/inertia.ts" />
+
 import './tailwind.css'
 import { hydrateRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'

@@ -1,7 +1,7 @@
 import { Button, Checkbox, Field, Input, Label } from '@headlessui/react'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import { Head, Link, useForm } from '@inertiajs/react'
 import clsx from 'clsx'
-import Spinner from '~/components/spinner'
 
 function Login() {
   const form = useForm({
@@ -16,7 +16,7 @@ function Login() {
     if (form.processing) return
 
     form.post('/login', {
-      onError: () => {
+      onFinish: () => {
         form.reset('password')
       },
     })
@@ -78,31 +78,43 @@ function Login() {
           <Checkbox
             checked={form.data.remember}
             onChange={(checked) => form.setData('remember', checked)}
-            className="group block size-4 rounded border border-slate-400 bg-slate-100 data-[checked]:border-amber-600 data-[checked]:bg-amber-500"
+            className="group block rounded border border-slate-300 bg-slate-100"
           >
-            <svg
-              className="stroke-white opacity-0 group-data-[checked]:opacity-100"
-              viewBox="0 0 14 14"
-              fill="none"
-            >
-              <path
-                d="M3 8L6 11L11 3.5"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <Icon
+              icon="heroicons:check-16-solid"
+              className="size-4 text-slate-700 opacity-0 group-data-[checked]:opacity-100"
+            />
           </Checkbox>
-          <Label className="text-slate-500">Se souvenir de moi</Label>
+          <Label className="text-sm text-slate-500">Se souvenir de moi</Label>
         </Field>
 
         <Button
           type="submit"
           disabled={form.processing}
-          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg font-medium text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
+          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          {form.processing ? <Spinner text="Connexion" /> : 'Se connecter'}
+          {form.processing ? (
+            <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
+          ) : (
+            'Créer un compte'
+          )}
         </Button>
+
+        <div className="flex items-center gap-5">
+          <div className="w-full border-b border-slate-200"></div>
+          <span className="font-semibold text-slate-500">ou</span>
+          <div className="w-full border-b border-slate-200"></div>
+        </div>
+
+        <a
+          href="/discord/redirect"
+          className="flex items-center justify-center gap-4 rounded bg-[#7289da] p-2.5 text-white transition hover:opacity-90"
+        >
+          <div className="rounded-full bg-white p-2 transition hover:scale-105">
+            <Icon icon="simple-icons:discord" className="size-6 text-[#7289da]" />
+          </div>
+          <span>Se connecter avec Discord</span>
+        </a>
       </form>
     </>
   )

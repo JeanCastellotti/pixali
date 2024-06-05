@@ -19,6 +19,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
+  declare discordId: string | null
+
+  @column()
   declare roleId: Roles
 
   @column()
@@ -27,11 +30,17 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare email: string
 
+  @column()
+  declare avatar: string | null
+
   @column({ serializeAs: null })
   declare password: string
 
   @column({ serializeAs: null })
   declare passwordResetToken: string | null
+
+  @column()
+  declare emailVerified: boolean | null
 
   @column.dateTime()
   declare emailVerifiedAt: DateTime | null

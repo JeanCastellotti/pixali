@@ -5,7 +5,7 @@ export const createUserValidator = vine.compile(
     username: vine
       .string()
       .trim()
-      .alpha()
+      .alphaNumeric()
       .minLength(3)
       .maxLength(12)
       .unique(async (db, value) => {
@@ -16,7 +16,6 @@ export const createUserValidator = vine.compile(
       .string()
       .trim()
       .email()
-      .normalizeEmail()
       .unique(async (db, value) => {
         const user = await db.from('users').where('email', value).first()
         return !user
@@ -27,7 +26,7 @@ export const createUserValidator = vine.compile(
 
 createUserValidator.messagesProvider = new SimpleMessagesProvider({
   'username.required': "Le nom d'utilisateur est obligatoire",
-  'username.alpha': "Le nom d'utilisateur ne peut contenir que des lettres",
+  'username.alphaNumeric': "Le nom d'utilisateur ne peut contenir que des chiffres et des lettres",
   'username.minLength': "Le nom d'utilisateur doit faire au moins 3 caractères",
   'username.maxLength': "Le nom d'utilisateur ne doit pas dépasser 12 caractères",
   'username.database.unique': "Le nom d'utilisateur est indisponible",

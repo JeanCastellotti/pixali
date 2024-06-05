@@ -1,21 +1,13 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Icon } from '@iconify/react'
-
-type InertiaUser = {
-  id: number
-  username: string
-  email: string
-  emailVerifiedAt: string
-  createdAt: string
-  updatedAt: string
-}
+import type { SharedProps } from '@adonisjs/inertia/types'
 
 function EmailVerificationBanner() {
-  const user = usePage().props.user as InertiaUser
+  const { authenticated } = usePage<SharedProps>().props
 
-  if (!user) return
+  if (!authenticated) return
 
-  if (user.emailVerifiedAt) return
+  if (authenticated.verified) return
 
   return (
     <div className="bg-slate-800 py-3">
