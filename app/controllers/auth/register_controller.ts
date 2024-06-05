@@ -3,6 +3,7 @@ import User from '#models/user'
 import { createUserValidator } from '#validators/user'
 import mail from '@adonisjs/mail/services/main'
 import type { HttpContext } from '@adonisjs/core/http'
+import Profile from '#models/profile'
 
 export default class RegisterController {
   create({ inertia }: HttpContext) {
@@ -13,6 +14,9 @@ export default class RegisterController {
     const payload = await request.validateUsing(createUserValidator)
 
     const user = await User.create(payload)
+
+    const profile = new Profile()
+    await user.related('profile').save(profile)
 
     await auth.use('web').login(user, true)
 
