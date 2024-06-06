@@ -1,14 +1,15 @@
 import { Button, Field, Input, Label } from '@headlessui/react'
+import { Icon } from '@iconify/react'
 import { Head, useForm } from '@inertiajs/react'
 import clsx from 'clsx'
-import Spinner from '~/components/spinner'
+import Show from '~/helpers/show'
 
 type Props = {
   email: string
   token: string
 }
 
-function ResetPassword({ email, token }: Props) {
+function ResetPassword({ token }: Props) {
   const form = useForm({
     password: '',
     passwordConfirmation: '',
@@ -38,17 +39,6 @@ function ResetPassword({ email, token }: Props) {
       <h1 className="mb-6 text-4xl font-medium text-slate-700">Modifier mot de passe</h1>
 
       <form onSubmit={submit} className="flex w-full flex-col space-y-6">
-        <Field className="flex flex-col" disabled>
-          <Label className="text-slate-700">Adresse e-mail</Label>
-          <Input
-            required
-            readOnly
-            type="email"
-            value={email}
-            className="rounded border p-4 text-slate-500 transition data-[disabled]:cursor-not-allowed data-[focus]:border-slate-100 data-[disabled]:bg-slate-50 data-[disabled]:text-slate-400 data-[focus]:outline-none"
-          />
-        </Field>
-
         <Field className="flex flex-col">
           <Label className="text-slate-700">Mot de passe</Label>
           <Input
@@ -63,11 +53,11 @@ function ResetPassword({ email, token }: Props) {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          {form.errors.password && (
+          <Show when={!!form.errors.password}>
             <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.password}
             </span>
-          )}
+          </Show>
         </Field>
 
         <Field className="flex flex-col">
@@ -89,9 +79,13 @@ function ResetPassword({ email, token }: Props) {
         <Button
           type="submit"
           disabled={form.processing}
-          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg font-medium text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
+          className="flex justify-center rounded bg-slate-700 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          {form.processing ? <Spinner text="Modification" /> : 'Modifier mot de passe'}
+          <Show when={form.processing} fallback="Modifier mot de passe">
+            <div className="size-6">
+              <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
+            </div>
+          </Show>
         </Button>
       </form>
     </>

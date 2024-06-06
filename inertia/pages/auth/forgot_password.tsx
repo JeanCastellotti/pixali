@@ -1,7 +1,8 @@
 import { Button, Field, Input, Label } from '@headlessui/react'
+import { Icon } from '@iconify/react'
 import { Head, useForm } from '@inertiajs/react'
 import clsx from 'clsx'
-import Spinner from '~/components/spinner'
+import Show from '~/helpers/show'
 
 function ForgotPassword() {
   const form = useForm({
@@ -14,7 +15,7 @@ function ForgotPassword() {
     if (form.processing) return
 
     form.post('/forgot-password', {
-      onFinish() {
+      onSuccess() {
         form.reset()
       },
     })
@@ -41,19 +42,23 @@ function ForgotPassword() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          {form.errors.email && (
+          <Show when={!!form.errors.email}>
             <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.email}
             </span>
-          )}
+          </Show>
         </Field>
 
         <Button
           type="submit"
           disabled={form.processing}
-          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg font-medium text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
+          className="flex justify-center rounded bg-slate-700 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          {form.processing ? <Spinner text="Connexion" /> : 'Réinitialiser mot de passe'}
+          <Show when={form.processing} fallback="Réinitialiser mot de passe">
+            <div className="size-6">
+              <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
+            </div>
+          </Show>
         </Button>
       </form>
     </>

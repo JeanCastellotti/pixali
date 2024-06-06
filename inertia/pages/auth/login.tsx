@@ -1,7 +1,8 @@
 import { Button, Checkbox, Field, Input, Label } from '@headlessui/react'
-import { Icon } from '@iconify/react/dist/iconify.js'
+import { Icon } from '@iconify/react'
 import { Head, Link, useForm } from '@inertiajs/react'
 import clsx from 'clsx'
+import Show from '~/helpers/show'
 
 function Login() {
   const form = useForm({
@@ -91,13 +92,13 @@ function Login() {
         <Button
           type="submit"
           disabled={form.processing}
-          className="flex justify-center rounded border border-amber-500 bg-gradient-to-r from-amber-500 to-amber-300 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
+          className="flex justify-center rounded bg-slate-700 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          {form.processing ? (
-            <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
-          ) : (
-            'Créer un compte'
-          )}
+          <Show when={form.processing} fallback="Se connecter">
+            <div className="size-6">
+              <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
+            </div>
+          </Show>
         </Button>
 
         <div className="flex items-center gap-5">
