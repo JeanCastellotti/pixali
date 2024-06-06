@@ -32,10 +32,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    */
   async handle(error: unknown, ctx: HttpContext) {
     if (error instanceof errors.E_INVALID_CREDENTIALS) {
-      ctx.session.flash('alert', {
-        type: 'error',
-        message: "Nous n'avons pas pu vous identifier.",
-      })
+      ctx.session.flash('error', "Nous n'avons pas pu vous identifier.")
 
       return ctx.response.redirect().back()
     }

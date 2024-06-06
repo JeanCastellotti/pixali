@@ -1,6 +1,5 @@
 import Header from '~/components/header'
 import EmailVerificationBanner from '~/components/email_verification_banner'
-import Alert from '~/components/alert'
 import UserMenu from '~/components/user_menu'
 import MainNav from '~/components/main_nav'
 import type { ReactNode } from 'react'
@@ -17,7 +16,6 @@ function Default({ children }: Props) {
         <MainNav />
         <UserMenu />
       </Header>
-      <Alert />
       <main className="container">{children}</main>
     </div>
   )

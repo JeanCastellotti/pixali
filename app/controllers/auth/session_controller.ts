@@ -13,10 +13,7 @@ export default class SessionController {
 
     await auth.use('web').login(user, !!request.input('remember'))
 
-    session.flash('alert', {
-      type: 'success',
-      message: 'Vous êtes connecté.',
-    })
+    session.flash('success', 'Vous êtes connecté.')
 
     return response.redirect().toRoute('home')
   }
@@ -24,10 +21,7 @@ export default class SessionController {
   async destroy({ auth, session, response }: HttpContext) {
     await auth.use('web').logout()
 
-    session.flash('alert', {
-      type: 'success',
-      message: 'Vous avez été déconnecté.',
-    })
+    session.flash('success', 'Vous avez été déconnecté.')
 
     return response.redirect().toRoute('home')
   }

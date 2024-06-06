@@ -30,10 +30,7 @@ export default class PasswordResetController {
     const user = await User.findBy('passwordResetToken', token)
 
     if (!user) {
-      session.flash('alert', {
-        type: 'error',
-        message: 'Le lien est invalide ou a expiré.',
-      })
+      session.flash('error', 'Le lien est invalide ou a expiré.')
 
       return response.redirect().toRoute('password.forgot.create')
     }
@@ -42,10 +39,7 @@ export default class PasswordResetController {
 
     await mail.sendLater(new PasswordResetNotification(user))
 
-    session.flash('alert', {
-      type: 'success',
-      message: 'Votre mot de passe a été modifié.',
-    })
+    session.flash('success', 'Votre mot de passe a été modifié.')
 
     return response.redirect().toRoute('session.create')
   }

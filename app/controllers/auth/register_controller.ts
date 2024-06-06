@@ -22,10 +22,7 @@ export default class RegisterController {
 
     await mail.sendLater(new VerifyEmailNotification(user))
 
-    session.flash('alert', {
-      type: 'success',
-      message: 'Votre compte a été créé.',
-    })
+    session.flash('success', 'Votre compte a été créé.')
 
     return response.redirect().toRoute('home')
   }

@@ -9,6 +9,7 @@ import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import Default from './layouts/default'
 import type { ReactNode } from 'react'
 import Auth from './layouts/auth'
+import Toasts from './layouts/toasts'
 
 createInertiaApp({
   progress: { color: '#F7971E' },
@@ -19,9 +20,14 @@ createInertiaApp({
       import.meta.glob('./pages/**/*.tsx')
     )
     // @ts-expect-error
-    page.default.layout = name.startsWith('auth/')
-      ? (p: ReactNode) => <Auth children={p} />
-      : (p: ReactNode) => <Default children={p} />
+    // eslint-disable-next-line
+    page.default.layout = (page: ReactNode) => {
+      return (
+        <Toasts>
+          {name.startsWith('auth/') ? <Auth children={page} /> : <Default children={page} />}
+        </Toasts>
+      )
+    }
 
     return page
   },

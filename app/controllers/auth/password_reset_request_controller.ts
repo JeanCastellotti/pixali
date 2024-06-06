@@ -18,15 +18,11 @@ export default class PasswordResetRequestController {
 
     if (user) {
       const token = encryption.encrypt(string.random(32), '15m')
-      console.log(token)
       await user.merge({ passwordResetToken: token }).save()
       await mail.sendLater(new PasswordResetRequestNotification(user, token))
     }
 
-    session.flash('alert', {
-      type: 'info',
-      message: 'Vous allez recevoir un lien pour modifier votre mot de passe.',
-    })
+    session.flash('info', 'Vous allez recevoir un lien pour modifier votre mot de passe.')
 
     return response.redirect().back()
   }

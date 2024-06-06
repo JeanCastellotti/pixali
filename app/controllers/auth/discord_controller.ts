@@ -13,19 +13,13 @@ export default class DiscordController {
     const discord = ally.use('discord')
 
     if (discord.accessDenied()) {
-      session.flash('alert', {
-        type: 'error',
-        message: "Vous avez annulé le processus d'identification",
-      })
+      session.flash('error', "Vous avez annulé le processus d'identification")
 
       return response.redirect().toRoute('session.create')
     }
 
     if (discord.stateMisMatch() || discord.hasError()) {
-      session.flash('alert', {
-        type: 'error',
-        message: 'Un problème est survenu. Veuillez réessayer.',
-      })
+      session.flash('error', 'Un problème est survenu. Veuillez réessayer.')
 
       return response.redirect().toRoute('session.create')
     }
@@ -39,10 +33,7 @@ export default class DiscordController {
     if (user) {
       await auth.use('web').login(user)
 
-      session.flash('alert', {
-        type: 'success',
-        message: 'Vous êtes connecté.',
-      })
+      session.flash('success', 'Vous êtes connecté.')
 
       return response.redirect().toRoute('home')
     }
@@ -53,10 +44,7 @@ export default class DiscordController {
       .first()
 
     if (userExists) {
-      session.flash('alert', {
-        type: 'info',
-        message: 'Vous avez déjà un compte avec cette adresse e-mail.',
-      })
+      session.flash('info', 'Vous avez déjà un compte avec cette adresse e-mail.')
 
       return response.redirect().toRoute('session.create')
     }
@@ -74,10 +62,7 @@ export default class DiscordController {
 
     await auth.use('web').login(user)
 
-    session.flash('alert', {
-      type: 'success',
-      message: 'Vous êtes connecté.',
-    })
+    session.flash('success', 'Vous êtes connecté.')
 
     return response.redirect().toRoute('home')
   }

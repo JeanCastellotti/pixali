@@ -18,13 +18,11 @@ const inertiaConfig = defineConfig({
         avatar: ctx.auth.user.avatar,
         verified: !!ctx.auth.user.emailVerified,
       },
-    alert: (ctx) =>
-      ctx.session.flashMessages.get('alert') as
-        | {
-            type: 'success' | 'error' | 'info'
-            message: string
-          }
-        | undefined,
+    flash: (ctx) => ({
+      success: ctx.session.flashMessages.get('success') as string | undefined,
+      error: ctx.session.flashMessages.get('error') as string | undefined,
+      info: ctx.session.flashMessages.get('info') as string | undefined,
+    }),
   },
 
   /**
