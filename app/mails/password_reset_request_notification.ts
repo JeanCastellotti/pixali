@@ -12,8 +12,6 @@ export default class PasswordResetRequestNotification extends BaseMail {
   }
 
   prepare() {
-    console.log(encodeURIComponent(this.token))
-
     const passwordResetURL = router
       .builder()
       .prefixUrl(env.get('APP_URL'))
