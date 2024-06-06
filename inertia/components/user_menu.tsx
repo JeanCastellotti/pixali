@@ -2,6 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/r
 import { Icon } from '@iconify/react'
 import { Link, usePage } from '@inertiajs/react'
 import type { SharedProps } from '@adonisjs/inertia/types'
+import Avatar from './avatar'
 
 function UserMenu() {
   const { authenticated } = usePage<SharedProps>().props
@@ -11,13 +12,13 @@ function UserMenu() {
       <div className="flex gap-2">
         <Link
           href="/login"
-          className="rounded bg-slate-200 px-2.5 py-1.5 text-sm text-slate-800 transition hover:opacity-80"
+          className="rounded bg-slate-200 px-2.5 py-1.5 text-sm text-slate-700 transition hover:opacity-90"
         >
           Se connecter
         </Link>
         <Link
           href="/register"
-          className="rounded bg-amber-500 px-2.5 py-1.5 text-sm text-white transition hover:opacity-80"
+          className="rounded bg-slate-700 px-2.5 py-1.5 text-sm text-white transition hover:opacity-90"
         >
           Créer un compte
         </Link>
@@ -29,17 +30,14 @@ function UserMenu() {
     <Menu>
       <MenuButton className="relative flex items-center gap-2 rounded-md px-2 py-1.5 data-[hover]:bg-slate-100 data-[open]:bg-slate-200">
         <div className="relative">
-          <img
-            src={
-              authenticated.avatar
-                ? authenticated.avatar
-                : `https://avatar.iran.liara.run/username?username=${authenticated.username}`
-            }
-            className="mr-2 size-8 rounded-full object-cover"
-          />
+          {authenticated.avatar ? (
+            <img src={authenticated.avatar} className="mr-2 size-8 rounded-full object-cover" />
+          ) : (
+            <Avatar username={authenticated.username} className="mr-2 size-8 text-sm" />
+          )}
           <div className="absolute -top-0.5 right-1 flex size-3">
             <div className="absolute size-full rounded-full bg-amber-500 opacity-75"></div>
-            <div className="relative size-3 rounded-full border-2 border-white bg-amber-500"></div>
+            <div className="relative size-3 rounded-full border-2 border-white bg-red-500"></div>
           </div>
         </div>
         <span className="text-sm text-slate-800">{authenticated.username}</span>
