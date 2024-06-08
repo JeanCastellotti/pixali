@@ -1,9 +1,8 @@
-import VerifyEmailNotification from '#mails/verify_email_notification'
-import User from '#models/user'
-import { createUserValidator } from '#validators/user'
 import mail from '@adonisjs/mail/services/main'
+import User from '#models/user'
+import VerifyEmailNotification from '#mails/verify_email_notification'
+import userCreateValidator from '#validators/user_create_validator'
 import type { HttpContext } from '@adonisjs/core/http'
-import Profile from '#models/profile'
 
 export default class RegisterController {
   create({ inertia }: HttpContext) {
@@ -11,12 +10,10 @@ export default class RegisterController {
   }
 
   async store({ request, auth, session, response }: HttpContext) {
-    const payload = await request.validateUsing(createUserValidator)
+    const payload = await request.validateUsing(userCreateValidator)
 
     const user = await User.create(payload)
-
-    const profile = new Profile()
-    await user.related('profile').save(profile)
+    await user.related('profile').create({})
 
     await auth.use('web').login(user, true)
 

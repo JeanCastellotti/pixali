@@ -1,6 +1,6 @@
 import PasswordResetNotification from '#mails/password_reset_notification'
 import User from '#models/user'
-import { passwordResetValidator } from '#validators/password'
+import passwordResetValidator from '#validators/password_reset_validator'
 import type { HttpContext } from '@adonisjs/core/http'
 import encryption from '@adonisjs/core/services/encryption'
 import mail from '@adonisjs/mail/services/main'
@@ -31,7 +31,6 @@ export default class PasswordResetController {
 
     if (!user) {
       session.flash('error', 'Le lien est invalide ou a expiré.')
-
       return response.redirect().toRoute('password.forgot.create')
     }
 

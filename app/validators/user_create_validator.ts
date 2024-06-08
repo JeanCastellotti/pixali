@@ -1,6 +1,6 @@
 import vine, { SimpleMessagesProvider } from '@vinejs/vine'
 
-export const createUserValidator = vine.compile(
+const userCreateValidator = vine.compile(
   vine.object({
     username: vine
       .string()
@@ -24,7 +24,7 @@ export const createUserValidator = vine.compile(
   })
 )
 
-createUserValidator.messagesProvider = new SimpleMessagesProvider({
+userCreateValidator.messagesProvider = new SimpleMessagesProvider({
   'username.required': "Le nom d'utilisateur est obligatoire",
   'username.alphaNumeric': "Le nom d'utilisateur ne peut contenir que des chiffres et des lettres",
   'username.minLength': "Le nom d'utilisateur doit faire au moins 3 caractères",
@@ -36,3 +36,5 @@ createUserValidator.messagesProvider = new SimpleMessagesProvider({
   'password.required': 'Le mot de passe est obligatoire',
   'password.minLength': 'Le mot de passe doit faire au moins 8 caractères',
 })
+
+export default userCreateValidator

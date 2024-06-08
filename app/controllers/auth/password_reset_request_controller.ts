@@ -3,7 +3,7 @@ import encryption from '@adonisjs/core/services/encryption'
 import type { HttpContext } from '@adonisjs/core/http'
 import string from '@adonisjs/core/helpers/string'
 import mail from '@adonisjs/mail/services/main'
-import { passwordResetRequestValidator } from '#validators/password'
+import passwordResetRequestValidator from '#validators/password_reset_request_validator'
 import PasswordResetRequestNotification from '#mails/password_reset_request_notification'
 
 export default class PasswordResetRequestController {
