@@ -37,12 +37,12 @@ function Register() {
         </span>
       </div>
 
-      <form onSubmit={submit} className="flex w-full flex-col space-y-6">
+      <form onSubmit={submit} className="flex w-full flex-col space-y-6" autoComplete="off">
         <Field className="flex flex-col">
           <Label className="text-slate-700">Nom d'utilisateur</Label>
           <Input
-            type="text"
             required
+            type="text"
             value={form.data.username}
             onChange={(e) => form.setData('username', e.target.value)}
             className={clsx(
@@ -62,8 +62,8 @@ function Register() {
         <Field className="flex flex-col">
           <Label className="text-slate-700">Adresse e-mail</Label>
           <Input
-            type="email"
             required
+            type="email"
             value={form.data.email}
             onChange={(e) => form.setData('email', e.target.value)}
             className={clsx(
@@ -83,8 +83,8 @@ function Register() {
         <Field className="flex flex-col">
           <Label className="text-slate-700">Mot de passe</Label>
           <Input
-            type="password"
             required
+            type="password"
             value={form.data.password}
             onChange={(e) => form.setData('password', e.target.value)}
             className={clsx(

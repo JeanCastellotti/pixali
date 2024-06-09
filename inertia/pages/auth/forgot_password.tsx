@@ -27,7 +27,7 @@ function ForgotPassword() {
 
       <h1 className="mb-6 text-4xl font-medium text-slate-700">Mot de passe oublié</h1>
 
-      <form onSubmit={submit} className="flex w-full flex-col space-y-6">
+      <form onSubmit={submit} className="flex w-full flex-col space-y-6" autoComplete="off">
         <Field className="flex flex-col">
           <Label className="text-slate-700">Adresse e-mail</Label>
           <Input

@@ -37,7 +37,7 @@ function Login() {
         </span>
       </div>
 
-      <form onSubmit={submit} className="flex w-full flex-col space-y-6">
+      <form onSubmit={submit} className="flex w-full flex-col space-y-6" autoComplete="off">
         <Field className="flex flex-col">
           <Label className="text-slate-700">Adresse e-mail</Label>
           <Input

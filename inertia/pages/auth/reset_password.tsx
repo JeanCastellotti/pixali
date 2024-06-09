@@ -38,7 +38,7 @@ function ResetPassword({ token }: Props) {
 
       <h1 className="mb-6 text-4xl font-medium text-slate-700">Modifier mot de passe</h1>
 
-      <form onSubmit={submit} className="flex w-full flex-col space-y-6">
+      <form onSubmit={submit} className="flex w-full flex-col space-y-6" autoComplete="off">
         <Field className="flex flex-col">
           <Label className="text-slate-700">Mot de passe</Label>
           <Input
