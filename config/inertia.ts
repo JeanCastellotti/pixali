@@ -16,12 +16,12 @@ const inertiaConfig = defineConfig({
       ctx.auth.user && {
         username: ctx.auth.user.username,
         avatar: ctx.auth.user.avatar,
-        verified: !!ctx.auth.user.emailVerified,
+        verified: ctx.auth.user.emailVerified,
       },
-    flash: (ctx) => ({
-      success: ctx.session.flashMessages.get('success') as string | undefined,
-      error: ctx.session.flashMessages.get('error') as string | undefined,
-      info: ctx.session.flashMessages.get('info') as string | undefined,
+    flash: (ctx): Record<'success' | 'error' | 'info', string | undefined> => ({
+      success: ctx.session.flashMessages.get('success'),
+      error: ctx.session.flashMessages.get('error'),
+      info: ctx.session.flashMessages.get('info'),
     }),
   },
 

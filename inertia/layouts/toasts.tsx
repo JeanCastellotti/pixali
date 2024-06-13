@@ -1,9 +1,9 @@
-import { SharedProps } from '@adonisjs/inertia/types'
 import { Icon } from '@iconify/react'
 import { usePage } from '@inertiajs/react'
 import clsx from 'clsx'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ReactNode, useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
+import type { SharedProps } from '@adonisjs/inertia/types'
 
 type Toast = {
   id: number
@@ -39,9 +39,8 @@ function Toasts({ children }: ToastsProps) {
   }, [flash])
 
   function addToast(toast: Toast) {
-    if (toasts.length >= 5) {
-      // setToasts((value) => [...value.slice(1)])
-      removeToast(toasts[0].id)
+    if (toasts.length > 0 && toasts.at(-1)?.message === toast.message) {
+      return
     }
 
     setToasts((value) => [...value, toast])
@@ -73,17 +72,16 @@ function Toast({ toast, removeToast }: ToastProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((value) => value - 1)
-    }, 50)
+    }, 75)
 
-    const timer = setTimeout(() => {
-      removeToast(toast.id)
-    }, 5000)
-
-    return () => {
-      clearInterval(interval)
-      clearTimeout(timer)
-    }
+    return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    if (progress === 0) {
+      removeToast(toast.id)
+    }
+  }, [progress])
 
   const classNames = {
     success: 'border-emerald-200 bg-emerald-100 text-emerald-600',
@@ -98,7 +96,7 @@ function Toast({ toast, removeToast }: ToastProps) {
   }[toast.type]
 
   const progressBar = {
-    success: 'bg-emerald-400',
+    success: 'bg-emerald-300',
     error: 'bg-red-300',
     info: 'bg-sky-300',
   }[toast.type]
@@ -116,13 +114,18 @@ function Toast({ toast, removeToast }: ToastProps) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 100 }}
       className={clsx(
-        'flex flex-col items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm',
+        'flex max-w-96 flex-col items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm',
         classNames
       )}
     >
       <div className="flex items-center gap-4">
         <Icon icon={icon} className="size-6 shrink-0" />
         <span>{toast.message}</span>
+        <Icon
+          icon="heroicons:x-circle"
+          className="size-6 shrink-0 cursor-pointer opacity-50 transition hover:opacity-100"
+          onClick={() => removeToast(toast.id)}
+        />
       </div>
       <div className={clsx('relative h-1.5 w-full rounded', progressBarBackground)}>
         <div
