@@ -30,7 +30,7 @@ const inertiaConfig = defineConfig({
    */
   ssr: {
     enabled: true,
-    entrypoint: 'inertia/ssr.tsx',
+    entrypoint: 'inertia/ssr.ts',
   },
 })
 

@@ -8,7 +8,7 @@ import PasswordResetRequestNotification from '#mails/password_reset_request_noti
 
 export default class PasswordResetRequestController {
   create({ inertia }: HttpContext) {
-    return inertia.render('auth/forgot_password')
+    return inertia.render('auth/forgot-password')
   }
 
   async store({ request, session, response }: HttpContext) {

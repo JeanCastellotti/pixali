@@ -2,7 +2,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./resources/views/app.edge', './inertia/**/*.{ts,tsx}'],
+  content: ['./resources/views/app.edge', './inertia/**/*.vue'],
   theme: {
     extend: {
       container: {

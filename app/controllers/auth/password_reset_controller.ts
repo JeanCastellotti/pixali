@@ -18,9 +18,9 @@ export default class PasswordResetController {
       return response.redirect().toRoute('password.forgot.create')
     }
 
-    return inertia.render('auth/reset_password', {
+    return inertia.render('auth/reset-password', {
       token: user.passwordResetToken,
-      email: user.email,
+      foo: 'foo',
     })
   }
 
