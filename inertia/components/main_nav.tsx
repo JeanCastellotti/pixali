@@ -1,4 +1,6 @@
-import MainNavItem from './main_nav_item'
+import { Link, usePage } from '@inertiajs/react'
+import clsx from 'clsx'
+import type { ReactNode } from 'react'
 
 function MainNav() {
   return (
@@ -8,6 +10,21 @@ function MainNav() {
       <MainNavItem href="/posts">Articles</MainNavItem>
       <MainNavItem href="/reviews">Tests</MainNavItem>
     </nav>
+  )
+}
+
+type MainNavItemProps = {
+  href: string
+  children: ReactNode
+}
+
+function MainNavItem({ href, children }: MainNavItemProps) {
+  const { url } = usePage()
+
+  return (
+    <Link href={href} className={clsx('hover:text-amber-500', url === href && 'text-slate-700')}>
+      {children}
+    </Link>
   )
 }
 
