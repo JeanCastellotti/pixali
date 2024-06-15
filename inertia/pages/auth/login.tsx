@@ -2,7 +2,6 @@ import { Button, Checkbox, Field, Input, Label } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import { Head, Link, useForm } from '@inertiajs/react'
 import clsx from 'clsx'
-import Show from '~/helpers/show'
 
 function Login() {
   const form = useForm({
@@ -94,11 +93,13 @@ function Login() {
           disabled={form.processing}
           className="flex justify-center rounded bg-slate-700 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          <Show when={form.processing} fallback="Se connecter">
+          {form.processing ? (
             <div className="size-6">
               <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
             </div>
-          </Show>
+          ) : (
+            'Se connecter'
+          )}
         </Button>
 
         <div className="flex items-center gap-5">

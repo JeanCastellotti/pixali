@@ -2,7 +2,6 @@ import { Button, Field, Input, Label } from '@headlessui/react'
 import { Icon } from '@iconify/react'
 import { Head, useForm } from '@inertiajs/react'
 import clsx from 'clsx'
-import Show from '~/helpers/show'
 
 type Props = {
   email: string
@@ -53,11 +52,11 @@ function ResetPassword({ token }: Props) {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          <Show when={!!form.errors.password}>
+          {form.errors.password && (
             <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.password}
             </span>
-          </Show>
+          )}
         </Field>
 
         <Field className="flex flex-col">
@@ -81,11 +80,13 @@ function ResetPassword({ token }: Props) {
           disabled={form.processing}
           className="flex justify-center rounded bg-slate-700 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          <Show when={form.processing} fallback="Modifier mot de passe">
+          {form.processing ? (
             <div className="size-6">
               <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
             </div>
-          </Show>
+          ) : (
+            'Modifier mot de passe'
+          )}
         </Button>
       </form>
     </>

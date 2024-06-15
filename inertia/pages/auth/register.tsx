@@ -2,7 +2,6 @@ import { Head, Link, useForm } from '@inertiajs/react'
 import { Button, Field, Input, Label } from '@headlessui/react'
 import clsx from 'clsx'
 import { Icon } from '@iconify/react'
-import Show from '~/helpers/show'
 
 function Register() {
   const form = useForm({
@@ -52,11 +51,11 @@ function Register() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          <Show when={!!form.errors.username}>
+          {form.errors.username && (
             <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.username}
             </span>
-          </Show>
+          )}
         </Field>
 
         <Field className="flex flex-col">
@@ -73,11 +72,11 @@ function Register() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          <Show when={!!form.errors.email}>
+          {form.errors.email && (
             <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.email}
             </span>
-          </Show>
+          )}
         </Field>
 
         <Field className="flex flex-col">
@@ -94,11 +93,11 @@ function Register() {
                 : 'border-slate-300 bg-slate-100 data-[focus]:border-amber-300 data-[focus]:bg-amber-50'
             )}
           />
-          <Show when={!!form.errors.password}>
+          {form.errors.password && (
             <span className="mt-1 flex items-center gap-2 text-sm text-red-500">
               {form.errors.password}
             </span>
-          </Show>
+          )}
         </Field>
 
         <Button
@@ -106,11 +105,13 @@ function Register() {
           disabled={form.processing}
           className="flex justify-center rounded bg-slate-700 p-4 text-lg/6 text-white transition data-[disabled]:cursor-not-allowed data-[hover]:opacity-90"
         >
-          <Show when={form.processing} fallback="Créer un compte">
+          {form.processing ? (
             <div className="size-6">
               <Icon icon="gg:spinner-two" className="size-6 animate-spin" />
             </div>
-          </Show>
+          ) : (
+            'Créer un compte'
+          )}
         </Button>
 
         <div className="flex items-center gap-5">
