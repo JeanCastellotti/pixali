@@ -3,7 +3,7 @@ import { createInertiaApp } from '@inertiajs/react'
 import Auth from './layouts/auth'
 import type { ReactNode } from 'react'
 import Default from './layouts/default'
-import Toasts from './layouts/toasts'
+import Toast from './components/toast'
 
 export default function render(page: any) {
   return createInertiaApp({
@@ -18,9 +18,10 @@ export default function render(page: any) {
       // eslint-disable-next-line
       page.default.layout = (page: ReactNode) => {
         return (
-          <Toasts>
+          <>
+            <Toast />
             {name.startsWith('auth/') ? <Auth children={page} /> : <Default children={page} />}
-          </Toasts>
+          </>
         )
       }
 
