@@ -8,6 +8,6 @@ export default class ProfileController {
   async handle({ auth, inertia }: HttpContext, presenter: UserPresenter) {
     assertExists(auth.user)
     await auth.user.load('profile')
-    return inertia.render('profile', { user: presenter.toJSON(auth.user) })
+    return inertia.render('account/profile', { user: presenter.toJSON(auth.user) })
   }
 }

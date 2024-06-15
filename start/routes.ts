@@ -42,7 +42,7 @@ router
 router.get('reset-password/:token', [PasswordResetController, 'create']).as('password.reset.create')
 router.post('reset-password', [PasswordResetController, 'store']).as('password.reset.store')
 
-router.get('/profile', [ProfileController]).as('user.profile')
+router.get('/account/profile', [ProfileController]).as('user.profile')
 
 router.get('/discord/redirect', [DiscordController, 'redirect']).as('discord.redirect')
 router.get('/discord/callback', [DiscordController, 'callback']).as('discord.callback')

@@ -10,6 +10,7 @@ import Default from './layouts/default'
 import type { ReactNode } from 'react'
 import Auth from './layouts/auth'
 import Toast from './components/toast'
+import Account from './layouts/account'
 
 createInertiaApp({
   progress: { color: '#F7971E' },
@@ -21,11 +22,15 @@ createInertiaApp({
     )
     // @ts-expect-error
     // eslint-disable-next-line
-    page.default.layout = (page: ReactNode) => {
+    page.default.layout ??= (page: ReactNode) => {
       return (
         <>
           <Toast />
-          {name.startsWith('auth/') ? <Auth children={page} /> : <Default children={page} />}
+          {name.startsWith('auth/') ? (
+            <Auth children={page} />
+          ) : (
+            <Default>{name.startsWith('account/') ? <Account children={page} /> : page}</Default>
+          )}
         </>
       )
     }

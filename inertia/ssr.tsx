@@ -4,6 +4,7 @@ import Auth from './layouts/auth'
 import type { ReactNode } from 'react'
 import Default from './layouts/default'
 import Toast from './components/toast'
+import Account from './layouts/account'
 
 export default function render(page: any) {
   return createInertiaApp({
@@ -16,11 +17,15 @@ export default function render(page: any) {
       const page = pages[`./pages/${name}.tsx`]
       // @ts-expect-error
       // eslint-disable-next-line
-      page.default.layout = (page: ReactNode) => {
+      page.default.layout ??= (page: ReactNode) => {
         return (
           <>
             <Toast />
-            {name.startsWith('auth/') ? <Auth children={page} /> : <Default children={page} />}
+            {name.startsWith('auth/') ? (
+              <Auth children={page} />
+            ) : (
+              <Default>{name.startsWith('account/') ? <Account children={page} /> : page}</Default>
+            )}
           </>
         )
       }

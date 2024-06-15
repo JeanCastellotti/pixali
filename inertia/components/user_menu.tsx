@@ -57,7 +57,7 @@ function UserMenu() {
         >
           <MenuItem>
             <Link
-              href="/profile"
+              href="/account/profile"
               className="flex items-center gap-4 rounded-md px-3 py-1.5 text-slate-500 hover:bg-slate-100"
             >
               <Icon icon="heroicons:user-16-solid" className="size-4 text-slate-800" />
